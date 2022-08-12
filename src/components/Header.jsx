@@ -17,7 +17,6 @@ const HeaderWrap = styled.div`
   width: 100%;
   height: 60px;
   background-color: #D3E0EA;
-
 `
 const HeaderBox = styled.div`
   margin: 0 auto;
