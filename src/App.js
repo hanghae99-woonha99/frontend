@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./App.css";
 import { RESP } from "./response";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -14,20 +13,20 @@ function App() {
   console.log(RESP);
   console.log(RESP.AUTH_POSTS.data.imgUrl);
 
-  const [state, setState] = useState("스태이트")
+  // const [state, setState] = useState("스태이트")
 
   return (
     <BrowserRouter>
       <Header />
-      <Layout state={state}>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/detail" element={<Detail />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/write" element={<Write />} />
-          <Route path="/update" element={<Update />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Main />} />
+            <Route path="/detail" element={<Detail />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/write" element={<Write />} />
+            <Route path="/update" element={<Update />} />
+          </Route>
         </Routes>
-      </Layout>
     </BrowserRouter>
   );
 }
