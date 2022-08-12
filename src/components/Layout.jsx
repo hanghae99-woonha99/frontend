@@ -1,9 +1,7 @@
 import React from "react";
-import './Layout.css'
 import styled from "styled-components";
 
 const Layout = () => {
-  return <div>Layout</div>;
   return <LayoutBox>Layout</LayoutBox>;
 };
 
