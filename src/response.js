@@ -130,6 +130,7 @@ export const RESP = {
         postId: 2,
         title: "제목입니다.2",
         descript: "내용입니다.2",
+        imgUrl: "http//:~~~.~~~",
         postLikeCnt: 30,
         commentCnt: 20,
         author: "nickname",
@@ -148,11 +149,13 @@ export const RESP = {
         postId: 2,
         title: "제목입니다.2",
         descript: "내용입니다.2",
+        imgUrl: "http//:~~~.~~~",
         author: "nickname",
         postLikeCnt: 30,
         commentCnt: 20,
         comments: [
           {
+            postId: 2,
             commentId: 1,
             author: "nickname",
             descript: "댓글입니다.",
