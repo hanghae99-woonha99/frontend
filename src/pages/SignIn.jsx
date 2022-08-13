@@ -4,7 +4,6 @@ import Header from "../components/Header";
 const SignIn = () => {
   return (
     <div>
-
       SignIn
     </div>
   );
