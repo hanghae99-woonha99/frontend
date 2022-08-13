@@ -12,7 +12,7 @@ import Layout from "./components/Layout";
 
 function App() {
   console.log(RESP);
-  console.log(RESP.AUTH_POSTS.data.imgUrl);
+  console.log(RESP.AUTH_POSTS[0].data.imgUrl);
 
   const [state, setState] = useState("스태이트")
 

@@ -47,26 +47,52 @@ export const RESP = {
     },
   ],
 
-  // 로그아웃 POST
-  LOG_OUT: {
-    suceess: true,
-    data: {
-      msg: "로그아웃 되었습니다.",
+  // 아이디 유효성 검사 POST
+  VALIDATE_NICKNAME: [
+    //검증 성공시
+    {
+      success: true,
+      data: {
+        msg: "사용 가능한 아이디입니다.",
+      },
+      error: null,
     },
-    error: null,
-  },
+
+    //검증 실패시
+    {
+      success: false,
+      data: null,
+      error: {
+        code: "HttpStatus",
+        msg: "중복된 아이디입니다. or 형식에 맞지 않는 아이디입니다.",
+      },
+    },
+  ],
+
+  // 로그아웃 POST
+  LOG_OUT: [
+    {
+      suceess: true,
+      data: {
+        msg: "로그아웃 되었습니다.",
+      },
+      error: null,
+    },
+  ],
 
   // 게시글 작성 POST
-  AUTH_POSTS: {
-    success: true,
-    data: {
-      msg: "게시글 등록 성공",
-      imgUrl: "https://velog.velcdn.com/images/hahbr88/post/3c6efc51-2684-44f7-b37f-186e33acc790/image.png",
-      createdAt: "2022-07-28T00:13:16.136823",
-      modifiedAt: "2022-07-28T00:13:46.925643",
+  AUTH_POSTS: [
+    {
+      success: true,
+      data: {
+        msg: "게시글 등록 성공",
+        imgUrl: "https://velog.velcdn.com/images/hahbr88/post/3c6efc51-2684-44f7-b37f-186e33acc790/image.png",
+        createdAt: "2022-07-28T00:13:16.136823",
+        modifiedAt: "2022-07-28T00:13:46.925643",
+      },
+      error: null,
     },
-    error: null,
-  },
+  ],
 
   // 게시글 수정 PUT
   AUTH_POSTS_UPDATE: [
@@ -143,23 +169,22 @@ export const RESP = {
   ],
 
   // 게시글 좋아요 POST
-  API_AUTH_POST_LIKE_POSTID: [
+  API_AUTH_POST_POSTID_LIKES: [
     {
       success: true,
       data: {
         postId: 1,
+        isLike: true,
         msg: "게시글 좋아요 성공",
       },
       error: null,
     },
-  ],
 
-  // 게시글 좋아요 취소 DELETE
-  API_AUTH_POST_UNLIKE_POSTID: [
     {
       success: true,
       data: {
         postId: 1,
+        isLike: false,
         msg: "게시글 좋아요 취소",
       },
       error: null,
@@ -167,27 +192,28 @@ export const RESP = {
   ],
 
   // 댓글 좋아요 POST
-  API_AUTH_COMMNENTS_LIKES_COMMENTID: [
+  API_AUTH_COMMNENTS_COMMENTID_LIKES: [
     {
       success: true,
       data: {
-        commentId: 1,
-        msg: "댓글 좋아요 성공",
-      },
-      error: null,
-    },
-  ],
+          postId: 1,
+          commentId: 1,
+          isLike: true,
+          msg: "댓글 좋아요 성공"
+       },
+      error: null
+  },
 
-  // 댓글 좋아요 취소 DELETE
-  API_AUTH_COMMNENTS_UNLIKES_COMMENTID: [
-    {
+  {
       success: true,
       data: {
-        commentId: 1,
-        msg: "댓글 좋아요 취소",
-      },
-      error: null,
-    },
+          postId: 1,
+          commentId: 1,
+          isLike: false,
+          msg: "게시글 좋아요 취소"
+       },
+      error: null
+  }
   ],
 
   // 댓글 작성 POST
