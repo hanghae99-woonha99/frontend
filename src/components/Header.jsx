@@ -20,8 +20,8 @@ const HeaderWrap = styled.div`
 `
 const HeaderBox = styled.div`
   margin: 0 auto;
-  width: 100%;
+  width: 70%;
   height: 100%;
-  max-width: 1200px;
+  max-width: 1920px;
   background-color: cyan;
 `
