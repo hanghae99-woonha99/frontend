@@ -9,12 +9,10 @@ import Update from "./pages/Update";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 
-function App() {
+const App = () => {
   console.log(RESP);
   console.log(RESP.AUTH_POSTS[0].data.imgUrl);
-
   // const [state, setState] = useState("스태이트")
-
   return (
     <BrowserRouter>
       <Header />
