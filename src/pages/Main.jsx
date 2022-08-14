@@ -1,13 +1,22 @@
 import React from "react";
-// import Header from "../components/Header";
-// import Layout from "../components/Layout";
+import styled from "styled-components";
+import Card from "../components/Card";
+
 
 const Main = () => {
   return (
-    <div>
-      나는 메인이야!!!
-    </div>
+    <CardList>
+      <Card/>
+    </CardList>
   );
 };
 
 export default Main;
+
+const CardList = styled.div`
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+`
