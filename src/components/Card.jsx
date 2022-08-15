@@ -4,22 +4,23 @@ import styled from "styled-components";
 import { RESP } from "../response";
 
 const Card = () => {
-  console.log(RESP.API_POSTS.at(0).data.imgUrl);
-  const resp = RESP.API_POSTS;
+
+  const resp = RESP.POSTS.data;
+  console.log(resp)
   return (
     <>
-      {resp.map((el, index) => {
+      {resp.map((el) => {
         return (
-          <CardWrap key={index}>
-            <CardImg src={el.data.imgUrl} alt="card image" />
-            <Title>{el.data.title}</Title>
-            <Text>{el.data.descript.substring(0, 30) + "..."}</Text>
-            <Date>{el.data.createdAt.substring(0, 10).split("-").join(".")}</Date>
+          <CardWrap key={el.postId}>
+            <CardImg src={el.imgUrl} alt="card image" />
+            <Title>{el.title}</Title>
+            <Text>{el.descript.substring(0, 30) + "..."}</Text>
+            <Date>{el.createdAt.substring(0, 10).split("-").join(".")}</Date>
             <BottomBox>
-              <Author>{el.data.author}</Author>
+              <Author>{el.author}</Author>
               <RLWrap>
-                <Riple>{`💬 ${el.data.commentCnt}`}</Riple>
-                <Like>{`❤ ${el.data.postLikeCnt}`}</Like>
+                <Riple>{`💬 ${el.commentCnt}`}</Riple>
+                <Like>{`❤ ${el.postLikeCnt}`}</Like>
               </RLWrap>
             </BottomBox>
           </CardWrap>
