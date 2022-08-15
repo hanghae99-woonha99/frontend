@@ -1,35 +1,30 @@
 import React from "react";
 import styled from "styled-components";
-import { useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+// import { useRef, useState } from 'react';
+// import { useNavigate } from "react-router-dom";
+
 import { RESP } from "../response";
 
 const Detail = () => {
-  console.log(RESP.API_POSTS_POSTID.at(0).data.imgUrl);
-  const resp = RESP.API_POSTS_POSTID;
-
-  const navigate = useNavigate();
-
-  return (
+  const resp = RESP.POSTS_POSTID.data;
+  // const navigate = useNavigate();
+  return(
     <>
-      {resp.map((el, index) => {
-        return (
-          <DetailWrap>
-            <DetailBox key={index}>
-              <h2>{el.data.title}</h2>
-              <img src={el.data.imgUrl} alt="card image" />
-              <p>{el.data.descript}</p>
-              <BtnGroup>
-                <button onClick={() => {navigate(-1);}}>뒤로가기</button>
-                <button>삭제하기</button>
-                <button>정비하기</button>
-              </BtnGroup>
-            </DetailBox>
-          </DetailWrap>
-        );
-      })}
+      <DetailWrap>
+        <DetailBox  key={resp.postId}>
+          <h1>{resp.title}</h1>
+          <img src={resp.imgUrl} alt="" />
+          <p>{resp.descript}</p>
+          <BtnGroup>
+            <button>뒤로가기</button>
+            <button>삭제하기</button>
+            <button>정비하기</button>
+          </BtnGroup>
+        </DetailBox>
+      </DetailWrap>
     </>
-  );
+  )
+
 };
 
 export default Detail;

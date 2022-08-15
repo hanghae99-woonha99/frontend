@@ -1,6 +1,6 @@
 import "./App.css";
-import { RESP } from "./response";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+//import { RESP } from "./response";
+import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Detail from "./pages/Detail";
 import SignIn from "./pages/SignIn";
@@ -17,7 +17,7 @@ const App = () => {
   // const [state, setState] = useState("스태이트")
 
   return (
-    <BrowserRouter>
+    <>
       <Header />
         <Routes>
           <Route element={<Layout />}>
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/update" element={<Update />} />
           </Route>
         </Routes>
-    </BrowserRouter>
+    </>    
   );
 }
 
