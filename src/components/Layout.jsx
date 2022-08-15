@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
@@ -18,5 +17,4 @@ const LayoutBox = styled.div`
   width: 70%;
   max-width: 1920px;
   display: block;
-  background-color: cyan;
 `
