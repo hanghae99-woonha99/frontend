@@ -41,9 +41,9 @@ const CardWrap = styled.article`
 
   // 그림자 효과
   transition: all 0.5s;
-  box-shadow: #1687a726 0px 2px 8px;
+  box-shadow: #1688a792 0px 2px 8px;
   &:hover {
-    box-shadow: #1687a726 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    box-shadow: #1687a726 0px 1px 4px, #1688a7 0px 0px 0px 3px;
   }
 `;
 

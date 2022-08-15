@@ -1,5 +1,4 @@
 import "./App.css";
-import { RESP } from "./response";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Detail from "./pages/Detail";
@@ -11,10 +10,6 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 
 const App = () => {
-  // console.log(RESP);
-  // console.log(RESP.AUTH_POSTS[0].data.imgUrl);
-
-  // const [state, setState] = useState("스태이트")
 
   return (
     <BrowserRouter>
