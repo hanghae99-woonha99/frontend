@@ -3,13 +3,18 @@ import styled from "styled-components";
 
 const SignIn = () => {
 
+
+
   return (
     <AccountSection>
       <FormSection>
-                <h1>회원가입</h1>
+                <h1>회원 가입</h1>
                 <label htmlFor="id">
                     <p>아이디</p>
-                    <Input id="id" type="text" required placeholder="아이디를 입력해 주세요" />
+                    <div style={{display: "flex", }}>
+                      <Input id="id" type="text" required placeholder="아이디를 입력해 주세요" />
+                      <ValidBtn>중복 확인</ValidBtn>
+                    </div>
                 </label>
                 <label htmlFor="pw">
                     <p>비밀번호</p>
@@ -83,9 +88,26 @@ const Input = styled.input`
   }
 `
 
+const ValidBtn = styled.button`
+  min-width: 60px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  font-size: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  background-color: #1687A7;
+  color: white;
+  border: none;
+  &:hover {
+    background-color: #276678;
+  }
+`
+
 const UserBtn = styled.button`
   width: 35%;
-  background-color:#000000;
+  background-color:#276678;
   color: white;
   border: none;
   cursor: pointer;
@@ -94,7 +116,7 @@ const UserBtn = styled.button`
   margin: 10px 0;
   transition: all 0.5s;
   &:hover {
-    background-color: #666666;
+    background-color: #1687A7;
   }
 `
 

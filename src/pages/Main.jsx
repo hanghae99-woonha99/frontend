@@ -4,6 +4,7 @@ import Card from "../components/Card";
 
 
 const Main = () => {
+
   return (
     <CardList>
       <Card/>
