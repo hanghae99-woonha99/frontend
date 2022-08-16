@@ -1,39 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
-import instance from "../../shared/Request"
-
-
-const getPost = () => {
-  return function(dispatch){
-    instance.get("/").then((res)=> {
-
-    }).catch((err) => {
-      console.log("에러 발생")
-    })
-  }
-}
-
+import instance from "../../shared/Request";
 
 export const createUser = (data) => {
   return async function (dispatch) {
+    console.log(data);
+    await instance
+      .post("members/signup", data, {
+        "Content-Type": "application/json",
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+};
 
-    console.log(data)
-    // await instance.post("/members/signup", data)
-  
-  }
-}
+export const loginUser = (data) => {
+  return async function (dispatch) {
+    await instance
+      .post("members/login", data, {
+        "Content-Type": "application/json",
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.success === true) {
+          return (
+            sessionStorage.setItem("token", response.headers.authorization),
+            sessionStorage.setItem("nickname", response.data.data.nickname),
+            alert(`${sessionStorage.nickname}님 환영합니다.`)
+            // window.location.replace("/")
+          );
+        } else {
+          return window.alert(response.data.error.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
-
-
-
-const initialState = { 
+const initialState = {
   users: [],
-}
+};
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {},
-})
-
+});
 
 export default userSlice.reducer;

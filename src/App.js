@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Detail from "./pages/Detail";
-import SignIn from "./pages/SignIn";
+import SignUp from "./pages/Signup";
 import Write from "./pages/Write";
 import Update from "./pages/Update";
 import Header from "./components/Header";
@@ -18,7 +18,7 @@ const App = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<Main />} />
             <Route path="/detail" element={<Detail />} />
-            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/write" element={<Write />} />
             <Route path="/update" element={<Update />} />

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 //확인용
 import { RESP } from "../response";
@@ -28,6 +29,7 @@ const Write = () => {
   }
 
   return (
+    <Layout>
     <WriteWrap>
       <WriteBox>
           <WriteInput type="text" placeholder="제목을 입력해주세요"/>
@@ -59,6 +61,7 @@ const Write = () => {
           </BtnGroup>
       </WriteBox>
     </WriteWrap>
+    </Layout>
   )
 }
 
