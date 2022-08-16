@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "./instance";
+import instance from "../../shared/Request";
 
 // const url = "http://3.39.10.121/";
 

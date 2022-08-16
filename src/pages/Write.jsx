@@ -48,7 +48,6 @@ const Write = () => {
 
 
   return (
-    <Layout>
     <WriteWrap>
       <WriteBox>
           <WriteInput type="text" placeholder="제목을 입력해주세요" defaultValue={title} onChange={(e) => setTitle(e.target.value)}  multiple="multiple"/>
@@ -81,7 +80,6 @@ const Write = () => {
           </BtnGroup>
       </WriteBox>
     </WriteWrap>
-    </Layout>
   )
 }
 
