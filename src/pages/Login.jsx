@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Login = () => {
+  const [loginId, setLoginId] = useState("");
+  const [loginPw, setLoginPw] = useState("");
+  const [savedLoginId, setSavedLoginId] = useState("");
+  const [savedLoginPw, setSavedLoginPw] = useState("");
+
+  let sessionStorage = window.sessionStorage;
+
+  const onChangeHandler = (event, setValue) => {
+    console.log(event.target.value);
+    setValue(event.target.value);
+  };
+
   return (
     <AccountSection>
       <FormSection>
         <h1>운하99</h1>
         <label htmlFor="id">
           <p>아이디</p>
-          <Input id="id" type="text" required placeholder="아이디를 입력해주세요" />
+          <Input id="id" type="text" required placeholder="아이디를 입력해주세요" onChange={(e) => onChangeHandler(e, setLoginId)} />
         </label>
         <label htmlFor="pw">
           <p>비밀번호</p>
-          <Input id="pw" required type="password" placeholder="비밀번호를 입력해 주세요" />
+          <Input id="pw" required type="password" placeholder="비밀번호를 입력해 주세요" onChange={(e) => onChangeHandler(e, setLoginPw)} />
         </label>
         <Line />
         <BtnWrap>
-          <UserBtn type="submit">회원가입</UserBtn>
-          <UserBtn>로그인</UserBtn>
+          <UserBtn>회원가입</UserBtn>
+          <UserBtn
+            onClick={() => {
+              sessionStorage.setItem("loginId", loginId);
+              sessionStorage.setItem("loginPw", loginPw);
+
+              setSavedLoginId(sessionStorage.getItem("loginId"));
+              setSavedLoginPw(sessionStorage.getItem("loginPw"));
+            }}
+          >
+            로그인
+          </UserBtn>
         </BtnWrap>
+      {/* <button onClick={ ()=>{
+        sessionStorage.clear();
+        setSavedLoginId(sessionStorage.getItem("loginId"));
+        setSavedLoginPw(sessionStorage.getItem("loginPw"));
+      } }>Logout</button>
+      <div>{JSON.stringify(sessionStorage)}</div> */}
       </FormSection>
     </AccountSection>
   );
@@ -53,6 +81,7 @@ const FormSection = styled.form`
   label {
     width: 80%;
   }
+
   label > p {
     margin: 5px 0;
     text-align: left;
@@ -75,7 +104,7 @@ const Input = styled.input`
 
 const UserBtn = styled.button`
   width: 35%;
-  background-color: #000000;
+  background-color: #276678;
   color: white;
   border: none;
   cursor: pointer;
@@ -84,7 +113,7 @@ const UserBtn = styled.button`
   margin: 10px 0;
   transition: all 0.5s;
   &:hover {
-    background-color: #666666;
+    background-color: #1687A7;
   }
 `;
 
