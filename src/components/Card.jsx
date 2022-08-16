@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { __getPostThunk } from "../redux/modules/mainSlice";
 import { RESP } from "../response";
 
 const Card = () => {
+
+  const dispatch = useDispatch()
+
+  const { posts } = useSelector((state) => state.main)
+
+  console.log(posts.postId)
+
+  useEffect(() => {
+    dispatch(__getPostThunk());
+  }, [dispatch])
+
+  const defaultImage = "https://velog.velcdn.com/images/hahbr88/post/67aab3ec-2a82-425e-bd2d-8108805e8389/image.png"
 
   const resp = RESP.POSTS.data;
   console.log(resp)
   return (
     <>
-      {resp.map((el) => {
+      {posts.map((el) => {
         return (
           <CardWrap key={el.postId}>
-            <CardImg src={el.imgUrl} alt="card image" />
+            <CardImg src={el.imgUrl==="" ? defaultImage : el.imgUrl} alt="card image" />
             <Title>{el.title}</Title>
             <Text>{el.descript.substring(0, 30) + "..."}</Text>
             <Date>{el.createdAt.substring(0, 10).split("-").join(".")}</Date>
             <BottomBox>
               <Author>{el.author}</Author>
               <RLWrap>
-                <Riple>{`💬 ${el.commentCnt}`}</Riple>
-                <Like>{`❤ ${el.postLikeCnt}`}</Like>
+                <Riple>{`💬 ${el.commentsCnt}`}</Riple>
+                <Like>{`❤ ${el.postLikesCnt}`}</Like>
               </RLWrap>
             </BottomBox>
           </CardWrap>
