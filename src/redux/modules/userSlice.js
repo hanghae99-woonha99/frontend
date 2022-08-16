@@ -28,8 +28,8 @@ export const loginUser = (data) => {
           return (
             sessionStorage.setItem("token", response.headers.authorization),
             sessionStorage.setItem("nickname", response.data.data.nickname),
-            alert(`${sessionStorage.nickname}님 환영합니다.`)
-            // window.location.replace("/")
+            alert(`${sessionStorage.nickname}님 환영합니다.`),
+            window.location.replace("/")
           );
         } else {
           return window.alert(response.data.error.msg);

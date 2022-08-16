@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "./instance";
-
-// const url = "http://3.39.10.121/";
+import instance from "../../shared/Request";
 
 const initialState = {
     post : {

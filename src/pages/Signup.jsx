@@ -24,23 +24,19 @@ const SignUp = () => {
     setUser({ ...user, [name]: value });
   };
 
-  useEffect(() =>{}, [])
+  useEffect(() => {}, []);
 
-  const onSubmitHandler = (event) => {
-    
-  }
+  const onSubmitHandler = (event) => {};
 
-  const onValidateHander = (event) => {
-
-  }
+  const onValidateHander = (event) => {};
 
   useEffect(() => {
     if (user.password.length < 8) {
       setPwChk(false);
     } else if (user.password.search(/\s/) != -1) {
       setPwChk(false);
-    // } else if (num < 0 || eng < 0 || spe < 0) {
-    //   setPwChk(false);
+      // } else if (num < 0 || eng < 0 || spe < 0) {
+      //   setPwChk(false);
     } else if (user.password === null) {
       setPwChk(false);
     } else {
@@ -48,37 +44,38 @@ const SignUp = () => {
     }
   }, [user.password]);
 
-
   return (
-      <AccountSection>
-        <FormSection onSubmit={onSubmitHandler}>
-          <h1>회원 가입</h1>
-          <label htmlFor="id">
-            <p>아이디</p>
-            <div style={{ display: "flex" }}>
-              <Input name='nickname'  type="text" required placeholder="영문 / 숫자 조합, 8~20자" onChange={onSignUpHandler} />
-              <ValidBtn type="button" onClick={onValidateHander}>중복 확인</ValidBtn>
-            </div>
-          </label>
-          <label htmlFor="pw">
-            <p>비밀번호</p>
-            <Input name= 'password'  required type="password" placeholder="비밀번호 영문/숫자 포함(8_20자) 작성해 주세요"  onChange={onSignUpHandler}/>
-          </label>
-          <label htmlFor="pw2">
-            <p>비밀번호 확인</p>
-            <Input name='passwordConfirm' type="password" required placeholder="비밀번호 한 번 더 입력해 주세요"  onChange={onSignUpHandler}/>
-          </label>
-          <label htmlFor="email">
-            <p>이메일</p>
-            <Input name='email' type="email" required placeholder="이메일을 형식에 맞게 입력해 주세요"  onChange={onSignUpHandler} />
-          </label>
-          <Line />
-          <BtnWrap>
-            <UserBtn>뒤로 가기</UserBtn>
-            <UserBtn type="submit">회원가입</UserBtn>
-          </BtnWrap>
-        </FormSection>
-      </AccountSection>
+    <AccountSection>
+      <FormSection onSubmit={onSubmitHandler}>
+        <h1>회원 가입</h1>
+        <label htmlFor="id">
+          <p>아이디</p>
+          <div style={{ display: "flex" }}>
+            <Input name="nickname" type="text" required placeholder="영문 / 숫자 조합, 8~20자" onChange={onSignUpHandler} />
+            <ValidBtn type="button" onClick={onValidateHander}>
+              중복 확인
+            </ValidBtn>
+          </div>
+        </label>
+        <label htmlFor="pw">
+          <p>비밀번호</p>
+          <Input name="password" required type="password" placeholder="비밀번호 영문/숫자 포함(8_20자) 작성해 주세요" onChange={onSignUpHandler} />
+        </label>
+        <label htmlFor="pw2">
+          <p>비밀번호 확인</p>
+          <Input name="passwordConfirm" type="password" required placeholder="비밀번호 한 번 더 입력해 주세요" onChange={onSignUpHandler} />
+        </label>
+        <label htmlFor="email">
+          <p>이메일</p>
+          <Input name="email" type="email" required placeholder="이메일을 형식에 맞게 입력해 주세요" onChange={onSignUpHandler} />
+        </label>
+        <Line />
+        <BtnWrap>
+          <UserBtn>뒤로 가기</UserBtn>
+          <UserBtn type="submit">회원가입</UserBtn>
+        </BtnWrap>
+      </FormSection>
+    </AccountSection>
   );
 };
 
