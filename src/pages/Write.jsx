@@ -2,18 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
+import { useDispatch } from "react-redux";
+import { addPostThunk } from "../redux/modules/postSlice";
 
 //확인용
-import { RESP } from "../response";
-
 const Write = () => {
+  const dispatch = useDispatch();
+  //const { id } = useParams();
   const fileInput = useRef(null);
   const navigate = useNavigate();
 
   //state
-  const [files, setFiles] = useState('');
   const [attachment, setAttachment] = useState("");
+  const [title, setTitle] = useState("");
+  const [descript, setDescript] = useState("");
+
+  
 
   //미리보기
   const onLoadFile = (e) => {
@@ -27,12 +31,28 @@ const Write = () => {
       setAttachment(result);
     };
   }
+  
+  //저장함수
+  const handleUpload = () => {
+    const file = fileInput.current.files[0];
+
+    const formData = new FormData();
+
+    formData.append("postImage", file);
+    formData.append("title", title);
+    formData.append("descript", descript);
+
+    //dispatch로 전역 state 변경
+    dispatch(addPostThunk(formData));
+  }
+
 
   return (
     <Layout>
     <WriteWrap>
       <WriteBox>
-          <WriteInput type="text" placeholder="제목을 입력해주세요"/>
+          <WriteInput type="text" placeholder="제목을 입력해주세요" defaultValue={title} onChange={(e) => setTitle(e.target.value)}  multiple="multiple"/>
+          
           <div className="imgBox">
             <strong>업로드된 이미지</strong>
             <PrevImg
@@ -49,15 +69,15 @@ const Write = () => {
 
               <FileCustom value="업로드 버튼을 클릭해주세요" placeholder="업로드 버튼을 클릭해주세요" />
               <FileLabel for="file-input">업로드</FileLabel> 
-              <FileInput type="file" id="file-input" accept="img/*" onChange={onLoadFile}  ref={fileInput}/>
+              <FileInput type="file" id="file-input" accept="img/*" onChange={onLoadFile}  ref={fileInput} multiple="multiple" />
             </ImageBox>
           </div>
 
-          <TextArea type="text" placeholder="내용을 입력해주세요"/>
+          <TextArea type="text" placeholder="내용을 입력해주세요" defaultValue={descript} onChange={(e) => setDescript(e.target.value)} multiple="multiple"/>
 
           <BtnGroup>
             <BtnBack onClick={() => {navigate(-1);}}>뒤로가기</BtnBack>
-            <BtnUpload>출항하기</BtnUpload>
+            <BtnUpload onClick={handleUpload}>출항하기</BtnUpload>
           </BtnGroup>
       </WriteBox>
     </WriteWrap>
