@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addPostThunk } from "../redux/modules/postSlice";
 
-
 //확인용
 const Write = () => {
   const dispatch = useDispatch();
@@ -49,6 +48,7 @@ const Write = () => {
 
 
   return (
+    <Layout>
     <WriteWrap>
       <WriteBox>
           <WriteInput type="text" placeholder="제목을 입력해주세요" defaultValue={title} onChange={(e) => setTitle(e.target.value)}  multiple="multiple"/>
@@ -81,6 +81,7 @@ const Write = () => {
           </BtnGroup>
       </WriteBox>
     </WriteWrap>
+    </Layout>
   )
 }
 

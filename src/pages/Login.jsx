@@ -1,52 +1,52 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/modules/userSlice";
 
 const Login = () => {
-  const [loginId, setLoginId] = useState("");
-  const [loginPw, setLoginPw] = useState("");
-  const [savedLoginId, setSavedLoginId] = useState("");
-  const [savedLoginPw, setSavedLoginPw] = useState("");
+  
+  const dispatch = useDispatch();
 
-  let sessionStorage = window.sessionStorage;
+  const initialState = {
+    nickname: "",
+    password: "",
+  };
+  const [member, setMember] = useState(initialState);
 
-  const onChangeHandler = (event, setValue) => {
+  console.log(member)
+
+  const onChangeHandler = (event) => {
     console.log(event.target.value);
-    setValue(event.target.value);
+    console.log(event.target.name);
+    const { name, value } = event.target;
+    setMember({ ...member, [name]: value });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(loginUser({
+      nickname: member.nickname,
+      password: member.password,
+    }));
   };
 
   return (
     <AccountSection>
-      <FormSection>
+      <FormSection onSubmit={onSubmitHandler}>
         <h1>운하99</h1>
-        <label htmlFor="id">
+        <label >
           <p>아이디</p>
-          <Input id="id" type="text" required placeholder="아이디를 입력해주세요" onChange={(e) => onChangeHandler(e, setLoginId)} />
+          <Input value={member.nickname} name="nickname" type="text" placeholder="아이디를 입력해주세요" onChange={onChangeHandler} />
         </label>
-        <label htmlFor="pw">
+        <label >
           <p>비밀번호</p>
-          <Input id="pw" required type="password" placeholder="비밀번호를 입력해 주세요" onChange={(e) => onChangeHandler(e, setLoginPw)} />
+          <Input value={member.password} name="password" type="password" placeholder="비밀번호를 입력해 주세요" onChange={onChangeHandler} />
         </label>
         <Line />
         <BtnWrap>
-          <UserBtn>회원가입</UserBtn>
-          <UserBtn
-            onClick={() => {
-              sessionStorage.setItem("loginId", loginId);
-              sessionStorage.setItem("loginPw", loginPw);
-
-              setSavedLoginId(sessionStorage.getItem("loginId"));
-              setSavedLoginPw(sessionStorage.getItem("loginPw"));
-            }}
-          >
-            로그인
-          </UserBtn>
+          <UserBtn type="button">회원가입</UserBtn>
+          <UserBtn>로그인</UserBtn>
         </BtnWrap>
-      {/* <button onClick={ ()=>{
-        sessionStorage.clear();
-        setSavedLoginId(sessionStorage.getItem("loginId"));
-        setSavedLoginPw(sessionStorage.getItem("loginPw"));
-      } }>Logout</button>
-      <div>{JSON.stringify(sessionStorage)}</div> */}
       </FormSection>
     </AccountSection>
   );
@@ -113,7 +113,7 @@ const UserBtn = styled.button`
   margin: 10px 0;
   transition: all 0.5s;
   &:hover {
-    background-color: #1687A7;
+    background-color: #1687a7;
   }
 `;
 

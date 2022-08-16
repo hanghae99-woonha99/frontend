@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 
-
 const Main = () => {
-
   return (
-    <CardList>
-      <Card/>
-    </CardList>
+      <CardList>
+        <Card />
+      </CardList>
   );
 };
 
@@ -20,4 +18,4 @@ const CardList = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-`
+`;
