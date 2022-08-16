@@ -34,6 +34,21 @@ const SignUp = () => {
 
   }
 
+  useEffect(() => {
+    if (user.password.length < 8) {
+      setPwChk(false);
+    } else if (user.password.search(/\s/) != -1) {
+      setPwChk(false);
+    // } else if (num < 0 || eng < 0 || spe < 0) {
+    //   setPwChk(false);
+    } else if (user.password === null) {
+      setPwChk(false);
+    } else {
+      setPwChk(true);
+    }
+  }, [user.password]);
+
+
   return (
       <AccountSection>
         <FormSection onSubmit={onSubmitHandler}>
@@ -41,7 +56,7 @@ const SignUp = () => {
           <label htmlFor="id">
             <p>아이디</p>
             <div style={{ display: "flex" }}>
-              <Input name='nickname'  type="text" required placeholder="아이디를 입력해 주세요" onChange={onSignUpHandler} />
+              <Input name='nickname'  type="text" required placeholder="영문 / 숫자 조합, 8~20자" onChange={onSignUpHandler} />
               <ValidBtn type="button" onClick={onValidateHander}>중복 확인</ValidBtn>
             </div>
           </label>

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../redux/modules/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const initialState = {
     nickname: "",
     password: "",
@@ -44,7 +45,7 @@ const Login = () => {
         </label>
         <Line />
         <BtnWrap>
-          <UserBtn type="button">회원가입</UserBtn>
+          <UserBtn type="button" onClick={() => navigate("/signup")}>회원가입</UserBtn>
           <UserBtn>로그인</UserBtn>
         </BtnWrap>
       </FormSection>
