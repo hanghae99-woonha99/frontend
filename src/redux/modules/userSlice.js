@@ -11,13 +11,13 @@ export const createUser = (data) => {
         withCredentials: true,
       })
       .then((response) => {
-        alert("여기까지?")
-        console.log(response)
-        // if (response.data.success === false) {
-        //   return window.alert(response.data.error.message);
-        // } else {
-        //   return window.alert(`${response.data.data.memberId}님 회원가입을 축하드립니다!`), window.location.replace("/");
-        // }
+        alert("여기까지?");
+        console.log(response);
+        if (response.data.success === false) {
+          return window.alert(response.data.err.msg);
+        } else {
+          return window.alert(`${response.data.data.nickname}님 회원가입을 축하드립니다!`), window.location.replace("/");
+        }
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -39,7 +39,7 @@ export const loginUser = (data) => {
         if (response.data.success === true) {
           return (
             sessionStorage.setItem("token", response.headers.authorization),
-            cookies.save("refresh-token", response.headers['refresh-token']),
+            cookies.save("refresh-token", response.headers["refresh-token"]),
             sessionStorage.setItem("nickname", response.data.data.nickname),
             alert(`${sessionStorage.nickname}님 환영합니다.`),
             window.location.replace("/")
@@ -55,21 +55,30 @@ export const loginUser = (data) => {
 };
 
 export const validateId = (data) => {
-  console.log(data)
+  console.log(data);
   return async function (dispatch) {
     await instance
-      .get("members/validate/nickname" , data, {
-        "Content-Type": "application/json",
-        withCredentials: true,        
-      })
+      .post(
+        "members/validate/nickname", data
+      )
       .then((response) => {
-        console.log(response)
+        console.log(response);
+        console.log(response.data.success);
+        console.log(response.err);
+        if (response.data.success === true) {   // 중복된 아이디가 아니면
+          alert(response.data.data.msg)
+          sessionStorage.setItem("idValid", response.data.data.valid)
+        } else {
+          alert(response.data.error.msg)
+          sessionStorage.setItem("idValid", response.data.success)
+        }
+
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-}
+  };
+};
 
 const initialState = {
   users: [],

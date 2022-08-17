@@ -23,7 +23,7 @@ const SignUp = () => {
 
   const [user, setUser] = useState(initialState);
 
-  console.log(user);
+  // console.log(user);
 
   const onSignUpHandler = (event) => {
     // console.log(event.target.value);
@@ -33,7 +33,7 @@ const SignUp = () => {
   };
 
   // // 아이디 유효성 검사
-  const regId = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,12}$/;
+  const regId = /^[A-Za-z\d]{3,12}$/;
   useEffect(() => {
     if (regId.test(user.nickname)) {
       setIdChk(true);
@@ -66,6 +66,7 @@ const SignUp = () => {
 
 
   const submitUserInfo = () => {
+    
     if (idChk === false || pwChk === false || emChk === false) {
       alert("아이디, 비밀번호, 이메일을 형식에 맞게 입력해주세요.");
     } else {
@@ -78,19 +79,32 @@ const SignUp = () => {
         })
       );
     }
+
   };
 
   const onValidateHander = () => {
-    console.log(validate)
-    console.log(user.nickname)
-    dispatch(
-      validateId(
-        {
-          nickname: user.nickname
-        }
-      ) 
-    )
+    // console.log(validate)
+    // console.log(user.nickname)
+    if (user.nickname ==="") {
+      alert("아이디를 입력해주세요!")
+    } else {
+      dispatch(
+        validateId(
+          {
+            nickname: user.nickname
+          }
+        ) 
+      )
+      let valided = sessionStorage.getItem("idValid")
+      setValidate(valided)
+    }
   };
+
+  // useEffect(()=>{
+  //   onValidateHander()
+  // }, [validate])
+
+  console.log(validate)
 
   return (
     <AccountSection>
@@ -112,7 +126,7 @@ const SignUp = () => {
                 <div style={{ color: "red" }}>아이디가 형식에 맞지 않습니다.</div>
               )
             ) : (
-              <div style={{ color: "blue" }}>올바른 아이디 입니다.</div>
+              <div style={{ color: "blue" }}>형식에 맞는 아이디 입니다.</div>
             )}
           </Warn>
         </label>
