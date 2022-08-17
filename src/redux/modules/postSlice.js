@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/Request";
+import cookies from "react-cookies";
 
 const headers = {
   'Content-Type': 'multipart/form-data',
-  'Authorization': sessionStorage.getItem("token")
+  'Authorization': sessionStorage.getItem("token"),
+  'Refresh-Token': cookies.load("refresh-token")
 }
 
 export const postPostThunk = createAsyncThunk(
@@ -22,13 +24,26 @@ export const postPostThunk = createAsyncThunk(
         //   Authorization: sessionStorage.getItem("token")
         // }
       });
-      return thunkAPI.fulfillWithValue(data.data);
+      // return thunkAPI.fulfillWithValue(data.data);
+      return console.log(data);
     } catch (e) {
       return console.log(e);
     }
   }
 );
 
+//상세보기 포스트 가져오기 
+export const getPostThunk = createAsyncThunk(
+  "getPost",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await instance.get(`posts/${payload}`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
 
 const initialState = {
   post: [],
@@ -40,6 +55,14 @@ export const postSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [getPostThunk.fulfilled]: (state, action) => {
+      state.post = action.payload;
+    },
+    [getPostThunk.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
+    [getPostThunk.pending]: () => {},
+
     [postPostThunk.fulfilled]: (state, action) => {
       state.post = [...state.post, action.payload];
     },

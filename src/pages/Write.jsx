@@ -83,14 +83,14 @@ const Write = () => {
         <TextArea type="text" name="descript" value={upLoad.descript} onChange={onUpLoadHandler}/>
 
         <BtnGroup>
-          {/* <BtnBack
+          <BtnBack
             type="button"
             onClick={() => {
               navigate(-1);
             }}
           >
             뒤로가기
-          </BtnBack> */}
+          </BtnBack>
           <BtnUpload type="submit">출항하기</BtnUpload>
         </BtnGroup>
       </WriteBox>
