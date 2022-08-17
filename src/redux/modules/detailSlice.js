@@ -19,6 +19,7 @@ export const __getPostDetailThunk = createAsyncThunk(
     }
   );
   
+
   const initialState = {
     posts: {},
   };

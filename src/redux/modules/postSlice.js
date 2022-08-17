@@ -13,9 +13,9 @@ export const postPostThunk = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("들어와라");
     try { 
-      console.log("들어와라222");
-      console.log(sessionStorage.getItem("token"));
-      console.log(sessionStorage);
+      // console.log("들어와라222");
+      // console.log(sessionStorage.getItem("token"));
+      // console.log(sessionStorage);
       const data = await instance.post("auth/posts", payload, { 
         headers: headers
         // headers: {
@@ -32,6 +32,40 @@ export const postPostThunk = createAsyncThunk(
   }
 );
 
+export const delPostThunk = createAsyncThunk(
+  "DEL_POST",
+  async (payload, api) => {
+    try {
+      await instance.delete(`auth/posts/${payload}`);
+      return (
+        alert("삭제하시겠습니까??"),
+        window.location.replace("/")
+        )
+      //return window.location.replace("/");
+    } catch (e) {
+      return api.rejectWithValue(e);
+    }
+  }
+);
+
+export const editPostThunk = createAsyncThunk(
+  "EDIT_POST",
+  async (payload, thunkAPI) => {
+    try {
+      const  data = await instance.put(
+        `auth/posts/${payload}`,
+        payload.frm,
+        {
+          "Content-Type": "multipart/form-data",
+          withCredentials: true,
+        }
+      );
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
 
 
 const initialState = {

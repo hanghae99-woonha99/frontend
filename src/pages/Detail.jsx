@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { __getPostDetailThunk } from "../redux/modules/detailSlice";
+import { delPostThunk } from "../redux/modules/postSlice";
 
 const Detail = () => {
   const {id} = useParams();
@@ -12,6 +13,7 @@ const Detail = () => {
   console.log(id)
   
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostDetailThunk(id));
@@ -28,8 +30,12 @@ const Detail = () => {
             <LikeBox type="button">❤</LikeBox>
 
             <BtnBox>
-              <button>뒤로가기</button>
-              <button>삭제하기</button>
+              <button  
+              type="button"
+              onClick={() => {
+                navigate(-1);
+              }}>뒤로가기</button>
+              <button onClick={() => dispatch(delPostThunk(id))}>삭제하기</button>
               <button>정비하기</button>
             </BtnBox>
           </BtnGroup>
