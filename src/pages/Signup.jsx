@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { createUser } from "../redux/modules/userSlice";
+import { createUser, validateId } from "../redux/modules/userSlice";
 
 const SignUp = () => {
   const initialState = {
@@ -81,8 +81,15 @@ const SignUp = () => {
   };
 
   const onValidateHander = () => {
-    console.log(idChk)
+    console.log(validate)
     console.log(user.nickname)
+    dispatch(
+      validateId(
+        {
+          nickname: user.nickname
+        }
+      ) 
+    )
   };
 
   return (
@@ -260,7 +267,7 @@ const UserBtn = styled.button`
 
 const GrayBtn = styled.button`
   width: 35%;
-  background-color: #788c91;
+  background-color: gray;
   color: white;
   border: none;
   cursor: pointer;

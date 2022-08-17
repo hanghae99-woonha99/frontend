@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "../../shared/Request";
+import cookies from "react-cookies";
 
 export const createUser = (data) => {
   return async function (dispatch) {
@@ -20,7 +21,7 @@ export const createUser = (data) => {
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          window.alert(error.response.data.message);
+          alert(error.response.data.message);
         }
       });
   };
@@ -38,6 +39,7 @@ export const loginUser = (data) => {
         if (response.data.success === true) {
           return (
             sessionStorage.setItem("token", response.headers.authorization),
+            cookies.save("refresh-token", response.headers['refresh-token']),
             sessionStorage.setItem("nickname", response.data.data.nickname),
             alert(`${sessionStorage.nickname}님 환영합니다.`),
             window.location.replace("/")
@@ -53,15 +55,19 @@ export const loginUser = (data) => {
 };
 
 export const validateId = (data) => {
+  console.log(data)
   return async function (dispatch) {
     await instance
-      .post("members/validate/nickname" , data, {
+      .get("members/validate/nickname" , data, {
         "Content-Type": "application/json",
         withCredentials: true,        
       })
       .then((response) => {
         console.log(response)
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 

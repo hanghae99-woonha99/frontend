@@ -7,7 +7,7 @@ export const __getPostThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await instance.get("posts");
-      console.log(data.data)
+      // console.log(data.data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
