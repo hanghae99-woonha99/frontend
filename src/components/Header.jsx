@@ -9,7 +9,7 @@ const Header = () => {
   const nickname = sessionStorage.getItem("nickname");
   const logOut = () => {
     sessionStorage.clear();
-    cookies.remove("refresh-token");    
+    // cookies.remove("refresh-token");
     alert("로그아웃 되었습니다.")
     window.location.replace("/");
   };
