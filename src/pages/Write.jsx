@@ -1,78 +1,97 @@
 import React from "react";
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addPostThunk } from "../redux/modules/postSlice";
+import { postPostThunk } from "../redux/modules/postSlice";
+new Blob([JSON.stringify()], { type: "application/json" });
 
 //확인용
 const Write = () => {
   const dispatch = useDispatch();
-  //const { id } = useParams();
-  const fileInput = useRef(null);
   const navigate = useNavigate();
 
   //state
-  const [attachment, setAttachment] = useState("");
-  const [title, setTitle] = useState("");
-  const [descript, setDescript] = useState("");
+  //const [attachment, setAttachment] = useState("");
+
+  const initialState = {
+    title: "",
+    descript: "",
+  };
+
+  const [upLoad, setUpLoad] = useState(initialState);
 
   //미리보기
-  const onLoadFile = (e) => {
-    const reader = new FileReader();
-    const theFile = fileInput.current.files[0];
-    reader.readAsDataURL(theFile);
-    reader.onloadend = (finishiedEvent) => {
-      const {
-        currentTarget: { result },
-      } = finishiedEvent;
-      setAttachment(result);
-    };
+  const onUpLoadHandler = (e) => {
+    const { name, value } = e.target;
+    setUpLoad({ ...upLoad, [name]: value });
+  };
+
+  // 파일 저장
+  const [attachment, setAttachment] = useState("");
+
+  const saveFileImage = (e) => {
+    setAttachment(URL.createObjectURL(e.target.files[0]));
   };
 
   //저장함수
-  const handleUpload = () => {
-    const file = fileInput.current.files[0];
-
-    const formData = new FormData();
-
-    formData.append("postImage", file);
-    formData.append("title", title);
-    formData.append("descript", descript);
-
-    //dispatch로 전역 state 변경
-    dispatch(addPostThunk(formData));
+  const onPostingHandler = async (e) => {
+    if (
+      upLoad.title === "" ||
+      upLoad.descript === ""
+    ) {
+      alert("빈칸을 다 채워주세요.");
+      return;
+    }
+    e.preventDefault();
+    let frm = new FormData();
+    let postimage = document.getElementById("ex_file");
+    frm.append(
+      "data",
+      new Blob([JSON.stringify(upLoad)], { type: "application/json" })
+    );
+    frm.append("image", postimage.files[0]);
+      dispatch(postPostThunk(frm))
+      try {
+        const response = await dispatch(postPostThunk(frm))
+        if(response){
+          alert("글작성 성공");
+          // navigate(`/detail/${response.id}`)
+          // //navigate(`/main`)
+        }
+      }
+      catch (error){
+        console.log(error)
+      }
   };
-
+  
   return (
     <WriteWrap>
-      <WriteBox>
-        <WriteInput type="text" placeholder="제목을 입력해주세요" defaultValue={title} onChange={(e) => setTitle(e.target.value)} multiple="multiple" />
+      <WriteBox enctype="multipart/form-data" onSubmit={onPostingHandler}>
+        <WriteInput type="text" name="title" value={upLoad.title} onChange={onUpLoadHandler} />
 
         <div className="imgBox">
           <strong>업로드된 이미지</strong>
           <PrevImg src={attachment ? attachment : "image/upload.png"} alt="이미지 미리보기" />
           <ImageBox>
-            {/* <FileLabel for="file-input">업로드</FileLabel>
-              <FileInput id="file-input" type="file" accept="img/*" onChange={onLoadFile} ref={fileInput} /> */}
-
-            <FileCustom value="업로드 버튼을 클릭해주세요" placeholder="업로드 버튼을 클릭해주세요" />
-            <FileLabel for="file-input">업로드</FileLabel>
-            <FileInput type="file" id="file-input" accept="img/*" onChange={onLoadFile} ref={fileInput} multiple="multiple" />
+            <FileCustom placeholder="업로드 버튼을 클릭해주세요" />
+            <FileLabel htmlFor="ex_file">업로드</FileLabel>
+            <FileInput type="file" id="ex_file" accept="img/*" onChange={saveFileImage}/>
           </ImageBox>
         </div>
 
-        <TextArea type="text" placeholder="내용을 입력해주세요" defaultValue={descript} onChange={(e) => setDescript(e.target.value)} multiple="multiple" />
+        <TextArea type="text" name="descript" value={upLoad.descript} onChange={onUpLoadHandler}/>
 
         <BtnGroup>
           <BtnBack
+            type="button"
             onClick={() => {
               navigate(-1);
             }}
           >
             뒤로가기
           </BtnBack>
-          <BtnUpload onClick={handleUpload}>출항하기</BtnUpload>
+          <BtnUpload type="submit">출항하기</BtnUpload>
         </BtnGroup>
       </WriteBox>
     </WriteWrap>
@@ -88,7 +107,7 @@ const WriteWrap = styled.section`
   align-items: center;
 `;
 
-const WriteBox = styled.div`
+const WriteBox = styled.form`
   background-color: #fff;
   width: 100%;
   height: 100%;
@@ -174,7 +193,7 @@ const BtnGroup = styled.div`
   justify-content: flex-end;
 `;
 
-const BtnBack = styled.div`
+const BtnBack = styled.button`
   padding: 0 20px;
   color: #666;
   vertical-align: middle;
@@ -185,7 +204,7 @@ const BtnBack = styled.div`
   border-radius: 5px;
   margin-right: 10px;
 `;
-const BtnUpload = styled.div`
+const BtnUpload = styled.button`
   padding: 0 20px;
   color: #fff;
   vertical-align: middle;

@@ -1,63 +1,80 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/Request";
+import cookies from "react-cookies";
 
+const headers = {
+  'Content-Type': 'multipart/form-data',
+  'Authorization': sessionStorage.getItem("token"),
+  'Refresh-Token': cookies.load("refresh-token")
+}
+
+export const postPostThunk = createAsyncThunk(
+  "POST_POST",
+  async (payload, thunkAPI) => {
+    console.log("들어와라");
+    try { 
+      console.log("들어와라222");
+      console.log(sessionStorage.getItem("token"));
+      console.log(sessionStorage);
+      const data = await instance.post("auth/posts", payload, { 
+        headers: headers
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        //   withCredentials: true,
+        //   Authorization: sessionStorage.getItem("token")
+        // }
+      });
+      // return thunkAPI.fulfillWithValue(data.data);
+      return console.log(data);
+    } catch (e) {
+      return console.log(e);
+    }
+  }
+);
+
+//상세보기 포스트 가져오기 
+export const getPostThunk = createAsyncThunk(
+  "getPost",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await instance.get(`posts/${payload}`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
 
 const initialState = {
-    post : {
-        postId: 0,
-        title: "",
-        descript: "",
-        imgUrl: "",
-        author: "",
-        postLikeCnt: 0,
-        commentCnt: 0,
-    },
-    error: null,
+  post: [],
+  error: null,
 };
 
-export const addPostThunk = createAsyncThunk(
-    "POST_POST",
-    async (payload, thunkAPI) => {
-      try {
-        const { data } = await instance.post("auth/posts", payload, {
-          "Content-Type": "multipart/form-data",
-          withCredentials: true,
-        });
-        return window.location.replace("/");
-      } catch (e) {
-        return console.log(e);
-      }
-    }
-  );
-
-  export const postSlice = createSlice({
-    name: "posts",
-    initialState,
-    reducers: {},
-    extraReducers: {
-      [addPostThunk.fulfilled]: (state, action) => {
-        state.posts = [...state.posts, action.payload];
-      },
-      [addPostThunk.rejected]: (state, action) => {
-        state.error = action.payload;
-      },
-      [addPostThunk.pending]: () => {},
+export const postSlice = createSlice({
+  name: "post",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getPostThunk.fulfilled]: (state, action) => {
+      state.post = action.payload;
     },
-  });
+    [getPostThunk.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
+    [getPostThunk.pending]: () => {},
 
-// const postSlice = createSlice({
-//     name: "post",
-//     initialState,
-//     reducers: {
-//         //리듀서 안에서 만든 함수자체가 리듀서의 로직이자, 액션크리에이터!
-//         addPost: (state, action) => {
-//             console.log(action)
-//             state.name = "한빛"
-//         }
-//     }
-// })
+    [postPostThunk.fulfilled]: (state, action) => {
+      state.post = [...state.post, action.payload];
+    },
+    [postPostThunk.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
+    [postPostThunk.pending]: (state, action) => {
+      
+    },
 
-// 액션크리에이터를 컴포넌트에서 사용하기 위해 export 후 컴포넌트에 가서 useselector로 불러옴 
-export const { addPost } = postSlice.actions;
+  },
+});
 
+// export const {} = postsSlice.actions;
 export default postSlice.reducer;

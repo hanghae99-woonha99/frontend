@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getPostThunk  } from "../redux/modules/postSlice";
 // import { useRef, useState } from 'react';
 // import { useNavigate } from "react-router-dom";
-
-import { RESP } from "../response";
+//import { RESP } from "../response";
 
 const Detail = () => {
-  const resp = RESP.POSTS_POSTID.data;
+  const {id} = useParams();
+  const dispatch = useDispatch();
+
+  const post = useSelector((state) => state.post.post);
+  console.log(post.postId)
+
+  useEffect(() => {
+    dispatch(getPostThunk(id));
+  }, [dispatch, id]);
+
+  const post_Id = sessionStorage.getItem("postId");
+  
+  if (post === undefined) {
+    return;
+  }
+
+  //const resp = RESP.POSTS_POSTID.data;
   // const navigate = useNavigate();
   return(
     <>
       <DetailWrap>
-        <DetailBox  key={resp.postId}>
-          <h1>{resp.title}</h1>
-          <img src={resp.imgUrl} alt="" />
-          <p>{resp.descript}</p>
+        <DetailBox  key={post_Id}>
+          <h1>{post.title}</h1>
+          <img src={post.imgUrl} alt="" />
+          <p>{post.descript}</p>
           <BtnGroup>
             <button>뒤로가기</button>
             <button>삭제하기</button>
