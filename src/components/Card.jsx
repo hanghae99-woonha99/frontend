@@ -7,7 +7,11 @@ import { __getPostThunk } from "../redux/modules/mainSlice";
 // import { RESP } from "../response";
 
 const Card = () => {
+<<<<<<< HEAD
   const navigate=useNavigate()
+=======
+  const navigate = useNavigate();
+>>>>>>> feature/byungno
   const dispatch = useDispatch()
 
   const { posts } = useSelector((state) => state.main)
@@ -18,7 +22,8 @@ const Card = () => {
     dispatch(__getPostThunk());
   }, [dispatch])
 
-  const defaultImage = "https://velog.velcdn.com/images/hahbr88/post/67aab3ec-2a82-425e-bd2d-8108805e8389/image.png"
+  // const defaultImage = "https://velog.velcdn.com/images/hahbr88/post/67aab3ec-2a82-425e-bd2d-8108805e8389/image.png"
+  const defaultImage = "/image/tmp_gallery.png"
 
   // const resp = RESP.POSTS.data;
   // console.log(resp)
@@ -29,7 +34,7 @@ const Card = () => {
           <CardWrap key={el.postId} onClick={() => navigate(`detail/${posts.postId}`)}>
             <CardImg src={el.imgUrl==="" ? defaultImage : el.imgUrl} alt="card image" />
             <Title>{el.title}</Title>
-            <Text>{el.descript.substring(0, 30) + "..."}</Text>
+            <Text>{el.descript.length > 30 ? (el.descript.substring(0, 30) + "...") : (el.descript)}</Text>
             <Date>{el.createdAt.substring(0, 10).split("-").join(".")}</Date>
             <BottomBox>
               <Author>{el.author}</Author>
@@ -48,6 +53,7 @@ const Card = () => {
 export default Card;
 
 const CardWrap = styled.article`
+  background-color: #F6F5F5;
   width: 23%;
   height: 380px;
   border-radius: 5px;
@@ -58,7 +64,7 @@ const CardWrap = styled.article`
   transition: all 0.5s;
   box-shadow: #1688a792 0px 2px 8px;
   &:hover {
-    box-shadow: #1687a726 0px 1px 4px, #1688a7 0px 0px 0px 3px;
+    box-shadow: #1687a726 0px 1px 4px, #D3E0EA 0px 0px 0px 3px;
   }
 `;
 
