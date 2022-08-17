@@ -21,7 +21,7 @@ const Header = () => {
         <ButtonBox>
         {!nickname ? 
           (<button onClick={() => navigate("/login")}>로그인</button>) : 
-          (<div><VoyageBtn>출항하기</VoyageBtn><button onClick={logOut}>로그아웃</button></div>)}
+          (<div><VoyageBtn onClick={()=> navigate("/write")}>출항하기</VoyageBtn><button onClick={logOut}>로그아웃</button></div>)}
         </ButtonBox>
       </HeaderBox>
     </HeaderWrap>
