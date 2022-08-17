@@ -7,11 +7,7 @@ import { __getPostThunk } from "../redux/modules/mainSlice";
 // import { RESP } from "../response";
 
 const Card = () => {
-<<<<<<< HEAD
   const navigate=useNavigate()
-=======
-  const navigate = useNavigate();
->>>>>>> feature/byungno
   const dispatch = useDispatch()
 
   const { posts } = useSelector((state) => state.main)
@@ -70,7 +66,7 @@ const CardWrap = styled.article`
 
 const CardImg = styled.img`
   width: 97%;
-  height: 45%;
+  height: 50%;
 
   object-fit: cover;
   padding: 3px;
@@ -82,6 +78,7 @@ const Title = styled.div`
 `;
 const Text = styled.div`
   padding: 15px;
+  min-height: 42px;
   position: relative;
 `;
 const Date = styled.div`
