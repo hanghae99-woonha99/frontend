@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Detail from "../pages/Detail";
 import { __getPostThunk } from "../redux/modules/mainSlice";
 // import { RESP } from "../response";
 
 const Card = () => {
-
+  const navigate=useNavigate()
   const dispatch = useDispatch()
 
   const { posts } = useSelector((state) => state.main)
@@ -25,7 +26,7 @@ const Card = () => {
     <>
       {posts.map((el) => {
         return (
-          <CardWrap key={el.postId}>
+          <CardWrap key={el.postId} onClick={() => navigate(`detail/${posts.postId}`)}>
             <CardImg src={el.imgUrl==="" ? defaultImage : el.imgUrl} alt="card image" />
             <Title>{el.title}</Title>
             <Text>{el.descript.substring(0, 30) + "..."}</Text>
