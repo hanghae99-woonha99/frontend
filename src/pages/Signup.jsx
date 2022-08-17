@@ -96,6 +96,7 @@ const SignUp = () => {
         ) 
       )
       let valided = sessionStorage.getItem("idValid")
+      console.log(valided)
       setValidate(valided)
     }
   };
@@ -104,7 +105,7 @@ const SignUp = () => {
   //   onValidateHander()
   // }, [validate])
 
-  console.log(validate)
+  // console.log(validate)
 
   return (
     <AccountSection>

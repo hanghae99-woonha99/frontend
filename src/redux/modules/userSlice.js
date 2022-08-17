@@ -63,12 +63,12 @@ export const validateId = (data) => {
       )
       .then((response) => {
         console.log(response);
-        console.log(response.data.success);
-        console.log(response.err);
+        // console.log(response.data.success);
+        // console.log(response.err);
         if (response.data.success === true) {   // 중복된 아이디가 아니면
           alert(response.data.data.msg)
-          sessionStorage.setItem("idValid", response.data.data.valid)
-        } else {
+          sessionStorage.setItem("idValid", response.data.success)
+        } else {                                // 중복된 아이디라면
           alert(response.data.error.msg)
           sessionStorage.setItem("idValid", response.data.success)
         }
