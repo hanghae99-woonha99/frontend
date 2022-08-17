@@ -43,6 +43,7 @@ const Logo = styled.div`
   background-color: #d3e0ea;
   font-family: "Black Han Sans", sans-serif;
   font-size: 30px;
+  cursor: pointer;
 `;
 
 const ButtonBox = styled.div`

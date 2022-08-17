@@ -14,7 +14,7 @@ const Login = () => {
   };
   const [member, setMember] = useState(initialState);
 
-  console.log(member)
+  // console.log(member)
 
   const onChangeHandler = (event) => {
     console.log(event.target.value);

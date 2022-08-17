@@ -10,7 +10,18 @@ export const createUser = (data) => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
+        alert("여기까지?")
+        console.log(response)
+        // if (response.data.success === false) {
+        //   return window.alert(response.data.error.message);
+        // } else {
+        //   return window.alert(`${response.data.data.memberId}님 회원가입을 축하드립니다!`), window.location.replace("/");
+        // }
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          window.alert(error.response.data.message);
+        }
       });
   };
 };
@@ -40,6 +51,19 @@ export const loginUser = (data) => {
       });
   };
 };
+
+export const validateId = (data) => {
+  return async function (dispatch) {
+    await instance
+      .post("members/validate/nickname" , data, {
+        "Content-Type": "application/json",
+        withCredentials: true,        
+      })
+      .then((response) => {
+        console.log(response)
+      })
+  }
+}
 
 const initialState = {
   users: [],
