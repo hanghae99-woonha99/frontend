@@ -5,16 +5,16 @@ const initialState = {
   likes: [],
 };
 
-export const postLike = (data) => {
+export const postLike = async (data) => {
   console.log(data);
   return async function (dispatch) {
     await instance
       .get(
-        `auth/posts/{postId}/likes`, data
+        `auth/posts/${data}/likes`
       )
       .then((response) => {
+        console.log(response.data.postLikesCnt)
         console.log(response)
-
       })
       .catch((err) => {
         console.log(err);

@@ -8,10 +8,23 @@ import { delPostThunk } from "../redux/modules/postSlice";
 const Detail = () => {
   const {id} = useParams();
   const post = useSelector((state) => state.posts.posts);
+  const like = useSelector((state) => state.like)
+  console.log(like)
   console.log(post.id)
   console.log(post)
   console.log(id)
   
+  const [postLike, setPostLike] = useState()
+  const [commentLike, setCommentLike] = useState()
+
+  const likeInfo = useSelector((state) => state.like)
+  console.log(likeInfo)
+
+  const postLikehandler = async() => {
+    // if (likeInfo)
+  }
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,6 +32,7 @@ const Detail = () => {
     dispatch(__getPostDetailThunk(id));
   }, [dispatch, id]);
 
+  
   return(
     <>
       <DetailWrap>
@@ -27,7 +41,7 @@ const Detail = () => {
           <img src={post?.imgUrl} alt="" />
           <p>{post?.descript}</p>
           <BtnGroup>
-            <LikeBox type="button">❤</LikeBox>
+            <LikeBox onClick={postLikehandler} type="button">❤</LikeBox>
 
             <BtnBox>
               <button  
