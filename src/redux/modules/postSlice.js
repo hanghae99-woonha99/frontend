@@ -13,6 +13,7 @@ export const postPostThunk = createAsyncThunk(
     try { 
       console.log("들어와라222");
       console.log(sessionStorage.getItem("token"));
+      console.log(sessionStorage);
       const data = await instance.post("auth/posts", payload, { 
         headers: headers
         // headers: {
