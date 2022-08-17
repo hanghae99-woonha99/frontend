@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPostThunk } from "../redux/modules/mainSlice";
-import { RESP } from "../response";
+// import { RESP } from "../response";
 
 const Card = () => {
 
@@ -19,8 +19,8 @@ const Card = () => {
 
   const defaultImage = "https://velog.velcdn.com/images/hahbr88/post/67aab3ec-2a82-425e-bd2d-8108805e8389/image.png"
 
-  const resp = RESP.POSTS.data;
-  console.log(resp)
+  // const resp = RESP.POSTS.data;
+  // console.log(resp)
   return (
     <>
       {posts.map((el) => {

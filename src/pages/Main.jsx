@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
+import HeroImage from "../components/HeroImage";
 
 const Main = () => {
   return (

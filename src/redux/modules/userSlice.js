@@ -10,6 +10,7 @@ export const createUser = (data) => {
         withCredentials: true,
       })
       .then((response) => {
+        alert("여기까지?")
         console.log(response)
         // if (response.data.success === false) {
         //   return window.alert(response.data.error.message);
