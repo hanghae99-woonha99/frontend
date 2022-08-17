@@ -32,18 +32,7 @@ export const postPostThunk = createAsyncThunk(
   }
 );
 
-//상세보기 포스트 가져오기 
-export const getPostThunk = createAsyncThunk(
-  "getPost",
-  async (payload, thunkAPI) => {
-    try {
-      const { data } = await instance.get(`posts/${payload}`);
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.code);
-    }
-  }
-);
+
 
 const initialState = {
   post: [],
@@ -55,14 +44,6 @@ export const postSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getPostThunk.fulfilled]: (state, action) => {
-      state.post = action.payload;
-    },
-    [getPostThunk.rejected]: (state, action) => {
-      state.error = action.payload;
-    },
-    [getPostThunk.pending]: () => {},
-
     [postPostThunk.fulfilled]: (state, action) => {
       state.post = [...state.post, action.payload];
     },

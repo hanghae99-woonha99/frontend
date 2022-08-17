@@ -1,42 +1,37 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getPostThunk  } from "../redux/modules/postSlice";
-// import { useRef, useState } from 'react';
-// import { useNavigate } from "react-router-dom";
-//import { RESP } from "../response";
+import { __getPostDetailThunk } from "../redux/modules/detailSlice";
 
 const Detail = () => {
   const {id} = useParams();
+  const post = useSelector((state) => state.posts.posts);
+  console.log(post.id)
+  console.log(post)
+  console.log(id)
+  
   const dispatch = useDispatch();
 
-  const post = useSelector((state) => state.post.post);
-  console.log(post.postId)
-
   useEffect(() => {
-    dispatch(getPostThunk(id));
+    dispatch(__getPostDetailThunk(id));
   }, [dispatch, id]);
 
-  const post_Id = sessionStorage.getItem("postId");
-  
-  if (post === undefined) {
-    return;
-  }
-
-  //const resp = RESP.POSTS_POSTID.data;
-  // const navigate = useNavigate();
   return(
     <>
       <DetailWrap>
-        <DetailBox  key={post_Id}>
-          <h1>{post.title}</h1>
-          <img src={post.imgUrl} alt="" />
-          <p>{post.descript}</p>
+        <DetailBox >
+          <h1>{post?.title}</h1>
+          <img src={post?.imgUrl} alt="" />
+          <p>{post?.descript}</p>
           <BtnGroup>
-            <button>뒤로가기</button>
-            <button>삭제하기</button>
-            <button>정비하기</button>
+            <LikeBox type="button">❤</LikeBox>
+
+            <BtnBox>
+              <button>뒤로가기</button>
+              <button>삭제하기</button>
+              <button>정비하기</button>
+            </BtnBox>
           </BtnGroup>
         </DetailBox>
       </DetailWrap>
@@ -69,5 +64,15 @@ const DetailBox = styled.div`
 
 const BtnGroup = styled.div`
   display:flex;
-  justify-content: flex-end
+  justify-content: space-between
+`
+
+const LikeBox = styled.button`
+  border:0;
+  outline:0;
+  background-color:transparent;
+  
+`
+const BtnBox = styled.div`
+
 `

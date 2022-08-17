@@ -26,7 +26,7 @@ const Card = () => {
     <>
       {posts.map((el) => {
         return (
-          <CardWrap key={el.postId} onClick={() => navigate(`detail/${posts.postId}`)}>
+          <CardWrap key={el.postId} onClick={() => navigate(`detail/${el.postId}`)}>
             <CardImg src={el.imgUrl==="" ? defaultImage : el.imgUrl} alt="card image" />
             <Title>{el.title}</Title>
             <Text>{el.descript.substring(0, 30) + "..."}</Text>
