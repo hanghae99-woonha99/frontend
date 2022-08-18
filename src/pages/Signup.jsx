@@ -78,6 +78,7 @@ const SignUp = () => {
           email: user.email,
         })
       );
+      
     }
 
   };

@@ -77,7 +77,7 @@ const Detail = () => {
      
       <CommentWrap>
         <CommnentForm>
-          <input type="text" placeholder="댓글을 입력해주세요" value={inputForm} onChange={(e) => setInputForm(e.target.value)}/>
+          <textarea type="text" placeholder="댓글을 입력해주세요" value={inputForm} onChange={(e) => setInputForm(e.target.value)}/>
           <button type="submit" onClick={handleSubmit}>댓글달기</button>
           {/* <textarea/>
           <div>
@@ -145,6 +145,9 @@ const CommnentForm = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+  }
+  button {
+    
   }
 `
 const DetailWrap = styled.div`

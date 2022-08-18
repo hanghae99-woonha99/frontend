@@ -5,6 +5,7 @@ import instance from "../../shared/Request";
 const headers = {
   'Content-Type': 'multipart/form-data',
   'Authorization': sessionStorage.getItem("token")
+  // 'withCredentials': true,
   //'Refresh-Token': cookies.load("refresh-token")
 }
 
@@ -17,7 +18,7 @@ export const postPostThunk = createAsyncThunk(
       // console.log(sessionStorage.getItem("token"));
       // console.log(sessionStorage);
       const data = await instance.post("auth/posts", payload, { 
-        headers: headers
+        headers: headers,
         // headers: {
         //   "Content-Type": "multipart/form-data",
         //   withCredentials: true,

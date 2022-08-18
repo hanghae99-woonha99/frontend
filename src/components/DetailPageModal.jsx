@@ -60,13 +60,13 @@ const DetailPageModal = ({ show, onHide, setShow, id }) => {
     >
       <ModalContainer>
         <ModalBox enctype="multipart/form-data" onSubmit={onSubmitHandler}>
-          <FaTimesCircle className="faArrowLeft" onClick={onHide} />
-          <input name="title" value={editDetail?.title}  type="text"  onChange={inputBody}></input>
+          <FaTimesCircle className="faArrowLeft" style={{width:'2em', height:'2em'}} onClick={onHide} />
+          <input name="title" value={editDetail?.title}  type="text" placeholder="수정할 제목을 입력해주세요" onChange={inputBody}></input>
           <div className="imgBox">
-            <strong>수정 이미지</strong>
-            <PrevImg src={attachment ? attachment : "image/upload.png"} alt="이미지 미리보기" />
+            {/* <strong>수정 이미지</strong> */}
+            <PrevImg src={attachment ? attachment : "../image/upload.png"} alt="이미지 미리보기" />
             <ImageBox>
-              <FileCustom placeholder="업로드 버튼을 클릭해주세요" />
+              {/* <FileCustom placeholder="업로드 버튼을 클릭해주세요" /> */}
               <FileLabel htmlFor="ex_file">업로드</FileLabel>
               <FileInput type="file" id="ex_file" accept="img/*" onChange={saveFileImage}/>
             </ImageBox>
@@ -75,7 +75,7 @@ const DetailPageModal = ({ show, onHide, setShow, id }) => {
             name="descript"
             value={editDetail.descript}
             type="text"
-            placeholder="내용을 입력해주세요"
+            placeholder="수정할 내용을 입력해주세요"
             onChange={inputBody}
           />
           <button className="edit_done_btn">
@@ -102,19 +102,32 @@ const ModalContainer = styled.div`
 const ModalBox = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 15% auto;
-  width: 500px;
-  height: 300px;
+  margin: 8% auto;
+  width: 600px;
+  height: 500px;
   border: 3px #004e66 solid;
   border-radius: 5px;
   background: white;
   padding: 20px;
-  textarea[type="text"] {
-    border: 3px #fcbe32 solid;
+  
+  input[type="text"] {
+    box-sizing:border-box;
+    border: 2px #fcbe32 solid;
     border-radius: 5px;
-    width: 450px;
+    width: 100%;
+    font-size: large;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom:15px;
+    margin-top:10px;
+  }
+
+  textarea[type="text"] {
+    box-sizing:border-box;
+    border: 2px #fcbe32 solid;
+    border-radius: 5px;
+    width: 100%;
     height: 150px;
-    margin: auto;
     font-size: large;
     padding-left: 10px;
     padding-top: 10px;
@@ -122,24 +135,29 @@ const ModalBox = styled.form`
   button {
     background-color: #ff5f2e;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #e1eef6;
-    font-size: small;
-    width: 70px;
-    height: 50px;
+    font-size: 16px;
+    width: 80px;
+    height: 40px;
     cursor: pointer;
-    margin: 10px auto;
+    display:block;
+    margin-top:10px;
+    margin-left:auto;
   }
 `;
 
 const PrevImg = styled.img`
   width: 100%;
   max-widht: 600px;
-  height: 300px;
+  height: 200px;
   margin-bottom: 15px;
+  margint-top: 15px;
 `;
 
-const ImageBox = styled.div``;
+const ImageBox = styled.div`
+
+`;
 
 const FileCustom = styled.input`
   display: inline-block;
@@ -166,15 +184,16 @@ const FileInput = styled.input`
 `;
 
 const FileLabel = styled.label`
-  display: inline-block;
+  display: block;
   padding: 0 20px;
   color: #fff;
   vertical-align: middle;
   background-color: #1687a7;
   cursor: pointer;
+  width:50px;
   height: 40px;
   line-height: 40px;
-  margin-left: 10px;
+  margin-left: auto;
   border-radius: 5px;
   margin-bottom: 15px;
 `;

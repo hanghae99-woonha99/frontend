@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../shared/Request";
 
-
 export const __getCommentPostDetailThunk = createAsyncThunk(
   "GET_COMMENT_POST_DETAIL",
   async (payload, thunkAPI) => {
