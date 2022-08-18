@@ -37,6 +37,37 @@ export const __getLikeDetailThunk = createAsyncThunk(
   }
 );
 
+export const __doCommentLikeThunk = createAsyncThunk(
+  "DO_Comment_LIKE_POST",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await instance.get(`auth/posts/${payload}/likes`);
+      console.log(data)
+      return thunkAPI.fulfillWithValue(data.data.postLikeCnt);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
+
+export const __getCommentLikeDetailThunk = createAsyncThunk(
+  "GET_LIKE_DETAIL",
+  async (payload, thunkAPI) => {
+    try {
+      console.log(payload)
+      const res = await instance.get(`posts/${payload}`);
+      // console.log(data.data)
+      // return thunkAPI.fulfillWithValue(data.data);
+      return (
+          console.log(res.data.data.postLikeCnt), 
+          thunkAPI.fulfillWithValue(res.data.data.postLikeCnt)
+      )
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
+
 // export const postLike = async (data) => {
 //   return async function (dispatch) {
 //     await instance

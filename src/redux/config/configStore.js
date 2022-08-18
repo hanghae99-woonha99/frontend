@@ -4,6 +4,7 @@ import userSlice from "../modules/userSlice";
 import mainSlice from "../modules/mainSlice";
 import detailSlice from "../modules/detailSlice";
 import likeSlice from "../modules/likeSlice";
+import commentSlice from "../modules/commentSlice";
 
 const store = configureStore({
   reducer: { 
@@ -12,6 +13,7 @@ const store = configureStore({
     user: userSlice,
     main: mainSlice,
     like: likeSlice,
+    comments: commentSlice,
   },
 });
 

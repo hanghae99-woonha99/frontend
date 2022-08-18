@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { __getPostDetailThunk } from "../redux/modules/detailSlice";
-
 import { delPostThunk } from "../redux/modules/postSlice";
-import { __doLikeThunk, __getLikeDetailThunk } from "../redux/modules/likeSlice";
+import { __doLikeThunk, __getLikeDetailThunk,  } from "../redux/modules/likeSlice";
 import DetailPageModal from "../components/DetailPageModal";
-
+import CommentBox from "../components/CommentBox";
+import { addCommentList, __getCommentPostDetailThunk } from "../redux/modules/commentSlice"; 
 
 const Detail = () => {
   const {id} = useParams();
@@ -31,10 +31,27 @@ const Detail = () => {
   useEffect(() => {
     dispatch(__getPostDetailThunk(id));
     dispatch(__getLikeDetailThunk(id));
+    dispatch(__getCommentPostDetailThunk(id));
+
   }, [dispatch, id]);
 
   const [modalOn, setModalOn] = useState(false);
   
+  const [inputForm, setInputForm] = useState('');
+  const comments = useSelector((state) => state.comments.comments);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputForm) {
+      const newContents = { postId: { id }.id, descript: inputForm };
+      //console.log('22222222222', newContents);
+      dispatch(addCommentList(newContents));
+      setInputForm('');
+    } else {
+      alert('내용을 입력해주세요');
+    }
+  };
+
   return(
     <DetailContainer>
       <DetailWrap>
@@ -60,38 +77,18 @@ const Detail = () => {
       
       <CommentWrap>
         <CommnentForm>
-          <textarea/>
+          {/* <textarea/>
           <div>
             <span>댓글수</span>
             <button type="submit">댓글달기</button>
-          </div>
+          </div> */}
+          <input type="text" placeholder="댓글을 입력해주세요" value={inputForm} onChange={(e) => setInputForm(e.target.value)}/>
+          <button type="submit" onClick={handleSubmit}>댓글달기</button>
         </CommnentForm>
       </CommentWrap>
-      
-      <CommentList>
-        <CommentItem>
-          <div>
-            <span>댓글작성자</span>
-            <span>작성날짜</span>
-          </div>
-          <p>댓글 내용입니다.</p>
-          <div>
-            <LikeBox onClick={postLikehandler} type="button">❤ {like}</LikeBox>
-            <button>삭제하기</button>
-          </div>
-        </CommentItem>
-        <CommentItem>
-          <div>
-            <span>댓글작성자</span>
-            <span>작성날짜</span>
-          </div>
-          <p>댓글 내용입니다.</p>
-          <div>
-            <LikeBox onClick={postLikehandler} type="button">❤ {like}</LikeBox>
-            <button>삭제하기</button>
-          </div>
-        </CommentItem>
-      </CommentList>
+
+      <CommentBox id = {id} comments = {comments}></CommentBox>
+
       <DetailPageModal
         show={modalOn}
         id={id}
