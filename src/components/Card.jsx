@@ -30,13 +30,13 @@ const Card = () => {
           <CardWrap key={el.postId} onClick={() => navigate(`detail/${el.postId}`)}>
             <CardImg src={el.imgUrl==="" ? defaultImage : el.imgUrl} alt="card image" />
             <Title>{el.title}</Title>
-            <Text>{el.descript.length > 30 ? (el.descript.substring(0, 30) + "...") : (el.descript)}</Text>
+            <Text>{el.descript.length > 27 ? (el.descript.substring(0, 27) + "...") : (el.descript)}</Text>
             <Date>{el.createdAt.substring(0, 10).split("-").join(".")}</Date>
             <BottomBox>
               <Author>{el.author}</Author>
               <RLWrap>
-                <Riple>{`💬 ${el.commentsCnt}`}</Riple>
-                <Like>{`❤ ${el.postLikesCnt}`}</Like>
+                <Riple>{`💬 ${el.commentCnt}`}</Riple>
+                <Like>{`❤ ${el.postLikeCnt}`}</Like>
               </RLWrap>
             </BottomBox>
           </CardWrap>

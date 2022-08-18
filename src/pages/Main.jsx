@@ -14,9 +14,10 @@ const Main = () => {
 export default Main;
 
 const CardList = styled.div`
-  margin-top: 60px;
+  margin: 60px auto 0;
   display: flex;
   /* justify-content: space-between; */
+  max-width: 1200px;
   gap: 2.6%;
   flex-wrap: wrap;
   width: 100%;

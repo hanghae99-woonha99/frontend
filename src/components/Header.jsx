@@ -42,9 +42,10 @@ const HeaderWrap = styled.div`
 `;
 const HeaderBox = styled.div`
   margin: 0 auto;
-  width: 70%;
+  width: 100%;
+  /* min-width: 1000px; */
   height: 100%;
-  max-width: 1920px;
+  max-width: 1200px;
   background-color: #d3e0ea;
   display: flex;
   justify-content: space-between;
