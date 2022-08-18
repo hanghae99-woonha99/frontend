@@ -34,7 +34,7 @@ const Login = () => {
   return (
     <AccountSection>
       <FormSection onSubmit={onSubmitHandler}>
-        <h1>운하99</h1>
+        <h1 style={{color:'#1363df'}}>운하99</h1>
         <label >
           <p>아이디</p>
           <Input value={member.nickname} name="nickname" type="text" placeholder="아이디를 입력해주세요" onChange={onChangeHandler} />
@@ -105,7 +105,7 @@ const Input = styled.input`
 
 const UserBtn = styled.button`
   width: 35%;
-  background-color: #276678;
+  background-color: #1363df;
   color: white;
   border: none;
   cursor: pointer;
@@ -114,7 +114,7 @@ const UserBtn = styled.button`
   margin: 10px 0;
   transition: all 0.5s;
   &:hover {
-    background-color: #1687a7;
+    background-color: #193f7d;
   }
 `;
 

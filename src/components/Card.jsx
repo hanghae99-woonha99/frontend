@@ -2,27 +2,20 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Detail from "../pages/Detail";
 import { __getPostThunk } from "../redux/modules/mainSlice";
+import { FaHeart, FaCommentDots } from 'react-icons/fa';
 // import { RESP } from "../response";
 
 const Card = () => {
   const navigate=useNavigate()
   const dispatch = useDispatch()
-
   const { posts } = useSelector((state) => state.main)
-
-  console.log(posts.postId)
+  const defaultImage = "/image/tmp_gallery.png"
 
   useEffect(() => {
     dispatch(__getPostThunk());
   }, [dispatch])
 
-  // const defaultImage = "https://velog.velcdn.com/images/hahbr88/post/67aab3ec-2a82-425e-bd2d-8108805e8389/image.png"
-  const defaultImage = "/image/tmp_gallery.png"
-
-  // const resp = RESP.POSTS.data;
-  // console.log(resp)
   return (
     <>
       {posts.map((el) => {
@@ -35,8 +28,14 @@ const Card = () => {
             <BottomBox>
               <Author>{el.author}</Author>
               <RLWrap>
-                <Riple>{`💬 ${el.commentCnt}`}</Riple>
-                <Like>{`❤ ${el.postLikeCnt}`}</Like>
+                <Riple>
+                  <FaCommentDots style={{marginRight:'5px'}}/> 
+                  <span>{el.commentCnt}</span>
+                </Riple>
+                <Like>
+                  <FaHeart style={{color:'red', marginRight:'5px'}}/>
+                  <span>{el.postLikeCnt}</span>
+                </Like>
               </RLWrap>
             </BottomBox>
           </CardWrap>
@@ -102,6 +101,7 @@ const RLWrap = styled.div`
 `;
 const Riple = styled.span`
   padding: 5px;
+  margin-right: 10px;
 `;
 const Like = styled.span`
   padding: 5px;

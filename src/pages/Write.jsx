@@ -50,14 +50,13 @@ const Write = () => {
       "data",
       new Blob([JSON.stringify(upLoad)], { type: "application/json" })
     );
+    console.log(postimage)
     frm.append("image", postimage.files[0]);
-      dispatch(postPostThunk(frm))
       try {
         const response = await dispatch(postPostThunk(frm))
         if(response){
           alert("글작성 성공");
-          // navigate(`/detail/${response.id}`)
-          // navigate(`/main`)
+          navigate(`/`)
         }
       }
       catch (error){
@@ -76,7 +75,7 @@ const Write = () => {
           <ImageBox>
             <FileCustom placeholder="업로드 버튼을 클릭해주세요" />
             <FileLabel htmlFor="ex_file">업로드</FileLabel>
-            <FileInput type="file" id="ex_file" accept="img/*" onChange={saveFileImage}/>
+            <FileInput type="file" id="ex_file" accept="image/*" onChange={saveFileImage}/>
           </ImageBox>
         </div>
 
@@ -167,13 +166,15 @@ const FileLabel = styled.label`
   padding: 0 20px;
   color: #fff;
   vertical-align: middle;
-  background-color: #1687a7;
+  background-color: #1363df;
   cursor: pointer;
   height: 40px;
   line-height: 40px;
   margin-left: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
+  font-size:16px;
+  font-weight:600;
 `;
 
 const TextArea = styled.textarea`
@@ -203,14 +204,20 @@ const BtnBack = styled.button`
   line-height: 40px;
   border-radius: 5px;
   margin-right: 10px;
+  border:0;
+  font-size:16px;
+  font-weight:600;
 `;
 const BtnUpload = styled.button`
   padding: 0 20px;
   color: #fff;
   vertical-align: middle;
-  background-color: #1687a7;
+  background-color: #1363df;
   cursor: pointer;
   height: 40px;
   line-height: 40px;
   border-radius: 5px;
+  border:0;
+  font-size:16px;
+  font-weight:600;
 `;

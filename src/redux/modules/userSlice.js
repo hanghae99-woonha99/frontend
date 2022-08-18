@@ -4,15 +4,14 @@ import cookies from "react-cookies";
 
 export const createUser = (data) => {
   return async function (dispatch) {
-    console.log(data);
+    // console.log(data);
     await instance
       .post("members/signup", data, {
         "Content-Type": "application/json",
         withCredentials: true,
       })
       .then((response) => {
-        alert("여기까지?");
-        console.log(response);
+        // console.log(response);
         if (response.data.success === false) {
           return window.alert(response.data.err.msg);
         } else {

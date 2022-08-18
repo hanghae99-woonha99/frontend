@@ -4,7 +4,8 @@ import instance from "../../shared/Request";
 
 const headers = {
   'Content-Type': 'multipart/form-data',
-  'Authorization': sessionStorage.getItem("token")
+  'Authorization': sessionStorage.getItem("token"),
+  'withCredentials': true,
   //'Refresh-Token': cookies.load("refresh-token")
 }
 
