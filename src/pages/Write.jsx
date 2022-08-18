@@ -57,7 +57,7 @@ const Write = () => {
         if(response){
           alert("글작성 성공");
           // navigate(`/detail/${response.id}`)
-          // //navigate(`/main`)
+          // navigate(`/main`)
         }
       }
       catch (error){

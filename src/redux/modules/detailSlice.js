@@ -18,7 +18,7 @@ export const __getPostDetailThunk = createAsyncThunk(
       }
     }
   );
-  
+
 
   const initialState = {
     posts: {},
@@ -36,6 +36,8 @@ export const __getPostDetailThunk = createAsyncThunk(
       [__getPostDetailThunk.rejected]: (state, action) => {
         state.error = action.payload;
       },
+
+      
     },
   
   })
