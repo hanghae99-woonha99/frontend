@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://3.39.10.121/",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 // instance.interceptors.request.use(
@@ -26,7 +26,7 @@ const instance = axios.create({
 //     /*
 //       http status가 200인 경우
 //       응답 성공 직전 호출됩니다. 
-//       .then() 으로 이어집니다.
+//       .then() 으로 이어집니다.yar
 //   */
 //     return response;
 //   },

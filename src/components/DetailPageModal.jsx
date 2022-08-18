@@ -4,10 +4,12 @@ import { FaTimesCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { editDetailThunk } from "../redux/modules/postSlice";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 new Blob([JSON.stringify()], { type: "application/json" });
 
 const DetailPageModal = ({ show, onHide, setShow, id }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialState = {
     title: "",
     descript: "",
@@ -47,6 +49,7 @@ const DetailPageModal = ({ show, onHide, setShow, id }) => {
         setEditDetail(initialState);
         alert("정상적으로 등록 되었습니다");
         setShow(false);
+        navigate(`/`)
       }
   };
 
@@ -60,10 +63,16 @@ const DetailPageModal = ({ show, onHide, setShow, id }) => {
     >
       <ModalContainer>
         <ModalBox enctype="multipart/form-data" onSubmit={onSubmitHandler}>
+<<<<<<< HEAD
           <FaTimesCircle className="faArrowLeft" style={{width:'2em', height:'2em'}} onClick={onHide} />
           <input name="title" value={editDetail?.title}  type="text" placeholder="수정할 제목을 입력해주세요" onChange={inputBody}></input>
           <div className="imgBox">
             {/* <strong>수정 이미지</strong> */}
+=======
+          <FaTimesCircle className="faArrowLeft" style={{width:'2em', height:'2em'}}  onClick={onHide} />
+          <input name="title" value={editDetail?.title}  type="text" placeholder="수정할 제목을 입력해주세요" onChange={inputBody}></input>
+          <div className="imgBox">
+>>>>>>> 06c34e5bf446b47ca229a41c40a231b7b37b0d79
             <PrevImg src={attachment ? attachment : "../image/upload.png"} alt="이미지 미리보기" />
             <ImageBox>
               {/* <FileCustom placeholder="업로드 버튼을 클릭해주세요" /> */}
@@ -104,7 +113,11 @@ const ModalBox = styled.form`
   flex-direction: column;
   margin: 8% auto;
   width: 600px;
+<<<<<<< HEAD
   height: 500px;
+=======
+  height: 550px;
+>>>>>>> 06c34e5bf446b47ca229a41c40a231b7b37b0d79
   border: 3px #004e66 solid;
   border-radius: 5px;
   background: white;
@@ -138,7 +151,11 @@ const ModalBox = styled.form`
     border-radius: 5px;
     color: #e1eef6;
     font-size: 16px;
+<<<<<<< HEAD
     width: 80px;
+=======
+    width: 88px;
+>>>>>>> 06c34e5bf446b47ca229a41c40a231b7b37b0d79
     height: 40px;
     cursor: pointer;
     display:block;

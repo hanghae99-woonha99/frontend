@@ -50,11 +50,16 @@ const Write = () => {
       "data",
       new Blob([JSON.stringify(upLoad)], { type: "application/json" })
     );
+    console.log(postimage)
     frm.append("image", postimage.files[0]);
       try {
         const response = await dispatch(postPostThunk(frm))
         if(response){
           alert("글작성 성공");
+<<<<<<< HEAD
+=======
+          navigate(`/`)
+>>>>>>> 06c34e5bf446b47ca229a41c40a231b7b37b0d79
         }
       }
       catch (error){
@@ -73,7 +78,7 @@ const Write = () => {
           <ImageBox>
             <FileCustom placeholder="업로드 버튼을 클릭해주세요" />
             <FileLabel htmlFor="ex_file">업로드</FileLabel>
-            <FileInput type="file" id="ex_file" accept="img/*" onChange={saveFileImage}/>
+            <FileInput type="file" id="ex_file" accept="image/*" onChange={saveFileImage}/>
           </ImageBox>
         </div>
 

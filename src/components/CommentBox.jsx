@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { __getCommentPostDetailThunk, __doCommentLikeThunk, delCommemtThunk} from "../redux/modules/commentSlice";
-
+import { FaHeart } from 'react-icons/fa';
 
 const CommentBox = ({ comments }) => {
   
   const dispatch = useDispatch()
 
   const nickname = sessionStorage.getItem("nickname")
-  console.log(comments)
   return (
     
       <CommentList>
@@ -18,17 +17,17 @@ const CommentBox = ({ comments }) => {
             <CommentItem key={el.commentId}>
               <div>
                 <span>{el.author}</span>
-                <span>{el.createdAt}</span>
+                <span>{`${el.createdAt.split("T")[0].split('-').join('.')} ${el.createdAt.split("T")[1].split(".")[0]}`}</span>
               </div>
               <p>{el.descript}</p>
               <div>
                 <LikeBox onClick={() => dispatch(__doCommentLikeThunk(el.commentId))} type="button">
-                  ❤ {el.commentLikeCnt}
+                  <FaHeart style={{color:'red', fontSize:'12px'}} />
+                  <span>{el.commentLikeCnt}</span>
                 </LikeBox>
-                {nickname === el.author ? (<button onClick={() => dispatch(delCommemtThunk(el.commentId))}>삭제하기</button>):(
+                {nickname === el.author ? (<BtnDel onClick={() => dispatch(delCommemtThunk(el.commentId))}>삭제하기</BtnDel>):(
                   ''
                 )}
-                
               </div>
             </CommentItem>
         );
@@ -56,10 +55,38 @@ const CommentItem = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  div span:nth-child(1) {
+    font-weight: bold;
+
+  }
+  div span:nth-child(2) {
+    color: gray;
+    font-size: 12px;
+  }
+
+  p {
+    font-size: 13px;
+  }
 `;
 
 const LikeBox = styled.button`
   border: 0;
   outline: 0;
   background-color: transparent;
+  justify-content: space-between;
+  align-items: baseline;
+
+  span {
+    margin-left: 10px;
+
+    
+  }
 `;
+
+const BtnDel = styled.button`
+  background-color:#D3E0EA;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+`
+

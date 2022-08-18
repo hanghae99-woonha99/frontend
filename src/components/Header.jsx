@@ -18,10 +18,16 @@ const Header = () => {
     <HeaderWrap>
       <HeaderBox>
         <Logo onClick={() => navigate("/")}>운하99</Logo>
+        
+
         <ButtonBox>
         {!nickname ? 
           (<button onClick={() => navigate("/login")}>로그인</button>) : 
-          (<div><VoyageBtn onClick={()=> navigate("/write")}>출항하기</VoyageBtn><button onClick={logOut}>로그아웃</button></div>)}
+          (<div>
+            <span>{nickname}님 안녕하세요</span>
+            <VoyageBtn onClick={()=> navigate("/write")}>출항하기</VoyageBtn>
+            <button onClick={logOut}>로그아웃</button>
+          </div>)}
         </ButtonBox>
       </HeaderBox>
     </HeaderWrap>
@@ -31,7 +37,7 @@ const Header = () => {
 export default Header;
 
 const VoyageBtn = styled.button`
-  background-color : #276678;
+  background-color : #1363df;
   color : white;
   margin-right: 15px;
 `  
@@ -55,7 +61,7 @@ const Logo = styled.div`
   background-color: #d3e0ea;
   font-family: "Black Han Sans", sans-serif;
   font-size: 30px;
-  color: #276678;
+  color: #1363df;
   cursor: pointer;
 `;
 const ButtonBox = styled.div`
@@ -65,5 +71,10 @@ const ButtonBox = styled.div`
     border-radius: 10px;
     padding: 5px 15px;
     cursor: pointer;
+  }
+
+  span {
+    margin-right: 10px;
+    font-size: 13px;
   }
 `;

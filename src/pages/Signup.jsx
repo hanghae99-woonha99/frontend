@@ -78,9 +78,13 @@ const SignUp = () => {
           email: user.email,
         })
       );
+<<<<<<< HEAD
       
+=======
+      navigate(`/login`)
+>>>>>>> 06c34e5bf446b47ca229a41c40a231b7b37b0d79
     }
-
+    
   };
 
   const onValidateHander = () => {
@@ -258,17 +262,17 @@ const ValidBtn = styled.button`
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  background-color: #1687a7;
+  background-color: #1363df;
   color: white;
   border: none;
   &:hover {
-    background-color: #276678;
+    background-color: #1363df;
   }
 `;
 
 const UserBtn = styled.button`
   width: 35%;
-  background-color: #276678;
+  background-color: #1363df;
   color: white;
   border: none;
   cursor: pointer;
@@ -277,7 +281,7 @@ const UserBtn = styled.button`
   margin: 10px 0;
   transition: all 0.5s;
   &:hover {
-    background-color: #1687a7;
+    background-color: #193f7d;
   }
 `;
 
