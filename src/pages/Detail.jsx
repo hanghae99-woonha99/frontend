@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { __getPostDetailThunk } from "../redux/modules/detailSlice";
 import { delPostThunk } from "../redux/modules/postSlice";
 import { __doLikeThunk, __getLikeDetailThunk,  } from "../redux/modules/likeSlice";
-import DetailPageModal from "../components/DetailPageModal";
-import CommentBox from "../components/CommentBox";
+import DetailPageModal from "../components/DetailPageModal";import CommentBox from "../components/CommentBox";
 import { addCommentList, __getCommentPostDetailThunk } from "../redux/modules/commentSlice"; 
 
 const Detail = () => {
@@ -36,7 +35,7 @@ const Detail = () => {
   }, [dispatch, id]);
 
   const [modalOn, setModalOn] = useState(false);
-  
+
   const [inputForm, setInputForm] = useState('');
   const comments = useSelector((state) => state.comments.comments);
 
@@ -63,27 +62,28 @@ const Detail = () => {
             <LikeBox onClick={postLikehandler} type="button">❤ {like}</LikeBox>
 
             <BtnBox>
-              <button  
+              <BtnBack
               type="button"
               onClick={() => {
                 navigate(-1);
-              }}>뒤로가기</button>
-              <button onClick={() => dispatch(delPostThunk(id))}>삭제하기</button>
-              <button onClick={() => setModalOn(true)}>정비하기</button>
+              }}>뒤로가기</BtnBack>
+              <BtnDel onClick={() => dispatch(delPostThunk(id))}>삭제하기</BtnDel>
+              <BtnEdit onClick={() => setModalOn(true)}>정비하기</BtnEdit>
             </BtnBox>
+
           </BtnGroup>
         </DetailBox>
       </DetailWrap>
-      
+     
       <CommentWrap>
         <CommnentForm>
+          <input type="text" placeholder="댓글을 입력해주세요" value={inputForm} onChange={(e) => setInputForm(e.target.value)}/>
+          <button type="submit" onClick={handleSubmit}>댓글달기</button>
           {/* <textarea/>
           <div>
             <span>댓글수</span>
             <button type="submit">댓글달기</button>
           </div> */}
-          <input type="text" placeholder="댓글을 입력해주세요" value={inputForm} onChange={(e) => setInputForm(e.target.value)}/>
-          <button type="submit" onClick={handleSubmit}>댓글달기</button>
         </CommnentForm>
       </CommentWrap>
 
@@ -98,9 +98,7 @@ const Detail = () => {
         {" "}
       </DetailPageModal>
     </DetailContainer>
-
   )
-
 };
 
 export default Detail;
@@ -122,13 +120,11 @@ const CommentItem = styled.div`
     align-items: center;
   }
 `
-
 const DetailContainer = styled.div`
   max-width: 600px;
   width: 100%;
   margin: auto;
 `
-
 const CommentWrap = styled.div`
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin-top: 2rem;
@@ -136,7 +132,6 @@ const CommentWrap = styled.div`
   border-radius: 5px;
   width: 100%;
 `
-
 const CommnentForm = styled.div`
   width: 100%;
   textarea {
@@ -152,7 +147,6 @@ const CommnentForm = styled.div`
     margin-top: 1rem;
   }
 `
-
 const DetailWrap = styled.div`
   width: 100%;
   display: flex;
@@ -168,7 +162,6 @@ const DetailWrap = styled.div`
     margin: 0;
   }
 `
-
 const DetailBox = styled.div`
   width:100%;
   height:100%;
@@ -176,12 +169,10 @@ const DetailBox = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const BtnGroup = styled.div`
   display:flex;
   justify-content: space-between
 `
-
 const LikeBox = styled.button`
   border:0;
   outline:0;
@@ -189,5 +180,24 @@ const LikeBox = styled.button`
   
 `
 const BtnBox = styled.div`
+  button {
+    font-size:17px;
+    border-radius:10px;
+    border:0;
+    padding: 5px 15px;
+    display:inline-block;
+  }
 
+`
+const BtnBack = styled.button`
+  margin-right:8px;
+  background-color:#f0f0f0;
+`
+const BtnDel = styled.button`
+  margin-right:8px;
+  background-color:#D3E0EA;
+`
+const BtnEdit = styled.button`
+  color:#fff;
+  background-color:#276678;
 `
