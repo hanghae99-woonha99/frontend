@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { __getPostDetailThunk } from "../redux/modules/detailSlice";
+
 import { delPostThunk } from "../redux/modules/postSlice";
 import { __doLikeThunk, __getLikeDetailThunk } from "../redux/modules/likeSlice";
+import DetailPageModal from "../components/DetailPageModal";
+
 
 const Detail = () => {
   const {id} = useParams();
@@ -21,7 +24,7 @@ const Detail = () => {
   const postLikehandler = () => {
     dispatch(__doLikeThunk(id))
   }
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,6 +33,7 @@ const Detail = () => {
     dispatch(__getLikeDetailThunk(id));
   }, [dispatch, id]);
 
+  const [modalOn, setModalOn] = useState(false);
   
   return(
     <DetailContainer>
@@ -48,7 +52,7 @@ const Detail = () => {
                 navigate(-1);
               }}>뒤로가기</button>
               <button onClick={() => dispatch(delPostThunk(id))}>삭제하기</button>
-              <button>정비하기</button>
+              <button onClick={() => setModalOn(true)}>정비하기</button>
             </BtnBox>
           </BtnGroup>
         </DetailBox>
@@ -88,8 +92,16 @@ const Detail = () => {
           </div>
         </CommentItem>
       </CommentList>
-
+      <DetailPageModal
+        show={modalOn}
+        id={id}
+        setShow={setModalOn}
+        onHide={() => setModalOn(false)}
+      >
+        {" "}
+      </DetailPageModal>
     </DetailContainer>
+
   )
 
 };
