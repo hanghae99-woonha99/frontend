@@ -15,7 +15,7 @@ export const createUser = (data) => {
         if (response.data.success === false) {
           return window.alert(response.data.err.msg);
         } else {
-          return window.alert(`${response.data.data.nickname}님 회원가입을 축하드립니다!`), window.location.replace("/");
+          return window.alert(`${response.data.data.nickname}님 회원가입을 축하드립니다!`), window.location.replace("/login");
         }
       })
       .catch((error) => {

@@ -114,7 +114,7 @@ const ModalBox = styled.form`
   
   input[type="text"] {
     box-sizing:border-box;
-    border: 2px #fcbe32 solid;
+    border: 2px #1363df solid;
     border-radius: 5px;
     width: 100%;
     font-size: large;
@@ -126,7 +126,7 @@ const ModalBox = styled.form`
 
   textarea[type="text"] {
     box-sizing:border-box;
-    border: 2px #fcbe32 solid;
+    border: 2px #1363df solid;
     border-radius: 5px;
     width: 100%;
     height: 150px;
@@ -146,6 +146,7 @@ const ModalBox = styled.form`
     display:block;
     margin-top:10px;
     margin-left:auto;
+    text-align: center;
   }
 `;
 
@@ -189,8 +190,7 @@ const FileLabel = styled.label`
   display: block;
   padding: 0 20px;
   color: #fff;
-  vertical-align: middle;
-  background-color: #1687a7;
+  background-color: #1363df;
   cursor: pointer;
   width:50px;
   height: 40px;
@@ -198,4 +198,5 @@ const FileLabel = styled.label`
   margin-left: auto;
   border-radius: 5px;
   margin-bottom: 15px;
+  text-align: center;
 `;

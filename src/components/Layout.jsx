@@ -13,7 +13,7 @@ const Layout = () => {
 export default Layout;
 
 const LayoutBox = styled.div`
-  margin: 0 auto;
+  margin: 0 auto 50px;
   width: 70%;
   max-width: 1920px;
   display: block;
